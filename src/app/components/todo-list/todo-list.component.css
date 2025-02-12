@@ -4,6 +4,10 @@
   flex-direction: column;
   width: 99.6%;
   word-wrap: break-word;
+  .todoUncompleted {
+    overflow: auto;
+    max-height: 30rem;
+  }
 }
 .todoList span {
   padding: 0 0.25em;
@@ -77,7 +81,6 @@ hr {
   }
   .todoUncompleted {
     max-height: 30rem;
-    overflow-y: auto;
     display: grid;
 
     grid-template-areas: 'row row';
