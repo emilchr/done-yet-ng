@@ -4,7 +4,7 @@ import { Todo } from '../components/todo-list/todo.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class TodoListService {
+export class TodoData {
   private todos: Todo[] = [
     {
       taskId: 0,

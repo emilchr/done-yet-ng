@@ -5,7 +5,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { TodoListService } from '../../service/todo-list.service';
+import { TodoData } from '../../service/todo-list.service';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { Todo } from './todo.interface';
 
@@ -19,7 +19,7 @@ import { Todo } from './todo.interface';
 export class TodoListComponent {
   todos: Todo[] = [];
 
-  constructor(todos: TodoListService) {
+  constructor(todos: TodoData) {
     this.todos = todos.getTodos();
     // console.log(this.todos);
   }

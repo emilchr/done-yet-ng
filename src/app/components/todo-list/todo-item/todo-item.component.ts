@@ -1,5 +1,5 @@
 import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
-import { TodoListService } from '../../../service/todo-list.service';
+import { TodoData } from '../../../service/todo-list.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -13,7 +13,7 @@ export class TodoItemComponent {
   @Input() content = '';
   @Input() isComplete = false;
 
-  todoService = inject(TodoListService);
+  todoService = inject(TodoData);
 
   handleClick = () => {
     const newTodo = {
