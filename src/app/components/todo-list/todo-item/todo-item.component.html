@@ -1,5 +1,5 @@
-<div class="todo" id="">
-  <span>Content goes here</span>
-  <input name="checkbox" type="checkbox" />
-  <label for="checkbox"></label>
+<div class="todo" id="{{ taskId }}">
+  <span>{{ content }} </span>
+  <input name="checkbox" type="checkbox" [checked]="isComplete" />
+  <label for="checkbox" (click)="handleClick()"></label>
 </div>

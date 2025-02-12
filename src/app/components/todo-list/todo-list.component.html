@@ -1,41 +1,29 @@
 <div class="todoList">
   <div class="todoUncompleted">
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
-    <app-todo-item />
+    @for (todo of todos; track todo.taskId) {
+      @if (!todo.isComplete) {
+        <app-todo-item
+          [content]="todo.content"
+          [taskId]="todo.taskId"
+          [isComplete]="todo.isComplete"
+          (newStatus)="getStatus($event)"
+        />
+      }
+    }
   </div>
   <div class="show">
     <hr />
     <div class="todoCompleted">
-      <app-todo-item />
-      <app-todo-item />
-      <app-todo-item />
-      <app-todo-item />
-      <app-todo-item />
-      <app-todo-item />
-      <app-todo-item />
-      <app-todo-item />
-      <app-todo-item />
-      <app-todo-item />
-      <app-todo-item />
-      <app-todo-item />
-      <app-todo-item />
+      @for (todo of todos; track todo.taskId) {
+        @if (todo.isComplete) {
+          <app-todo-item
+            [content]="todo.content"
+            [taskId]="todo.taskId"
+            [isComplete]="todo.isComplete"
+            (newStatus)="getStatus($event)"
+          />
+        }
+      }
     </div>
   </div>
 </div>

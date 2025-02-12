@@ -9,6 +9,7 @@
     />
     <!-- <div class="toast">Toast!</div>-->
   </header>
-  <app-todo-list> </app-todo-list>
-  <app-user-input />
+  <app-todo-list [todos]="todos" (newStatus)="setStatus($event)">
+  </app-todo-list>
+  <app-user-input (postTodo)="getTodo($event)" />
 </div>
