@@ -5,7 +5,6 @@
   width: 99.6%;
   word-wrap: break-word;
   .todoUncompleted {
-    overflow: auto;
     max-height: 30rem;
   }
 }
@@ -86,6 +85,7 @@ hr {
     grid-template-areas: 'row row';
     grid-template-columns: 49%;
     gap: 0.25rem;
+    overflow-y: auto;
   }
   .todoCompleted {
     max-height: 30rem;
