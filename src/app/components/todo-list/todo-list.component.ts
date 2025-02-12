@@ -5,6 +5,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { TodoListService } from '../../service/todo-list.service';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { Todo } from './todo.interface';
 
@@ -16,10 +17,10 @@ import { Todo } from './todo.interface';
   encapsulation: ViewEncapsulation.None,
 })
 export class TodoListComponent {
-  @Input() todos: Todo[] = [];
-  @Output() newStatus = new EventEmitter<Todo>();
-  getStatus(newStatus: Todo) {
-    // console.log(newStatus);
-    this.newStatus.emit(newStatus);
+  todos: Todo[] = [];
+
+  constructor(todos: TodoListService) {
+    this.todos = todos.getTodos();
+    // console.log(this.todos);
   }
 }

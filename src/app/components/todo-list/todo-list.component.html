@@ -6,7 +6,6 @@
           [content]="todo.content"
           [taskId]="todo.taskId"
           [isComplete]="todo.isComplete"
-          (newStatus)="getStatus($event)"
         />
       }
     }
@@ -20,7 +19,6 @@
             [content]="todo.content"
             [taskId]="todo.taskId"
             [isComplete]="todo.isComplete"
-            (newStatus)="getStatus($event)"
           />
         }
       }

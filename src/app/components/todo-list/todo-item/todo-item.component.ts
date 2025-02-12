@@ -1,11 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
-import { Todo } from '../todo.interface';
+import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
+import { TodoListService } from '../../../service/todo-list.service';
 
 @Component({
   selector: 'app-todo-item',
@@ -18,14 +12,15 @@ export class TodoItemComponent {
   @Input() taskId = 0;
   @Input() content = '';
   @Input() isComplete = false;
-  @Output() newStatus = new EventEmitter<Todo>();
+
+  todoService = inject(TodoListService);
+
   handleClick = () => {
     const newTodo = {
       taskId: this.taskId,
       content: this.content,
       isComplete: this.isComplete ? false : true,
     };
-    this.newStatus.emit(newTodo);
-    // console.log(newTodo);
+    this.todoService.setStatus(newTodo);
   };
 }

@@ -1,6 +1,6 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Todo } from '../todo-list/todo.interface';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { TodoListService } from '../../service/todo-list.service';
 
 @Component({
   selector: 'app-user-input',
@@ -9,26 +9,22 @@ import { Todo } from '../todo-list/todo.interface';
   styleUrl: './user-input.component.css',
 })
 export class UserInputComponent {
-  @Output() postTodo = new EventEmitter<Todo>();
-
+  todoService = inject(TodoListService);
   private formBuilder = inject(FormBuilder);
   inputForm = this.formBuilder.group({
     userInput: [''],
   });
 
-  addTodo(todo: any) {
-    const currentTodo = {
-      taskId: Math.floor(Math.random() * 10000),
-      content: todo,
-      isComplete: false,
-    };
-    this.postTodo.emit(currentTodo);
-    // console.log(currentTodo);
-  }
-
   onSubmit() {
-    this.addTodo(this.inputForm.value.userInput);
+    // console.log(this.inputForm.value.userInput);
+    console.log(this.inputForm.controls['userInput'].value);
 
+    this.todoService.addTodo({
+      taskId: Math.floor(Math.random() * 10000),
+      // content: this.inputForm.value['userInput'],
+      content: this.inputForm.get('userInput'),
+      isComplete: false,
+    });
     this.inputForm.reset();
   }
 }
