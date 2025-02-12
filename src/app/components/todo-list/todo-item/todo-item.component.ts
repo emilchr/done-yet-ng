@@ -1,4 +1,5 @@
 import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
+import { ToastService } from '../../../service/toast.service';
 import { TodoData } from '../../../service/todo-list.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { TodoData } from '../../../service/todo-list.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class TodoItemComponent {
+  toasting = inject(ToastService);
   @Input() taskId = 0;
   @Input() content = '';
   @Input() isComplete = false;
@@ -22,5 +24,8 @@ export class TodoItemComponent {
       isComplete: this.isComplete ? false : true,
     };
     this.todoService.setStatus(newTodo);
+    this.isComplete
+      ? this.toasting.showToast('Uncompleted?')
+      : this.toasting.showToast('Todo completed!');
   };
 }

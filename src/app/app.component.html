@@ -8,6 +8,10 @@
       priority
     />
     <!-- <div class="toast">Toast!</div>-->
+
+    @if (currentToast.length >= 1) {
+      <div class="toast">{{ currentToast[0] }}</div>
+    }
   </header>
   <app-todo-list> </app-todo-list>
   <app-user-input />

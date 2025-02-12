@@ -1,7 +1,8 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { UserInputComponent } from './components/user-input/user-input.component';
+import { ToastService } from './service/toast.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,7 @@ import { UserInputComponent } from './components/user-input/user-input.component
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {}
+export class AppComponent {
+  toasting = inject(ToastService);
+  currentToast = this.toasting.currentToast;
+}
