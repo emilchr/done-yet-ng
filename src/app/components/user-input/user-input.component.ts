@@ -22,7 +22,7 @@ export class UserInputComponent {
     this.todoService.addTodo({
       taskId: Math.floor(Math.random() * 10000),
       // content: this.inputForm.value['userInput'],
-      content: this.inputForm.get('userInput'),
+      content: this.inputForm.get('userInput')?.value,
       isComplete: false,
     });
     this.inputForm.reset();
