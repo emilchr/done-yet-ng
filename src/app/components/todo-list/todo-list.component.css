@@ -1,0 +1,91 @@
+.todoList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 99.6%;
+  word-wrap: break-word;
+}
+.todoList span {
+  padding: 0 0.25em;
+}
+.show {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0.5em 0;
+}
+.show hr {
+  padding-left: 1em;
+  margin-bottom: 0.5em;
+  margin-left: 1.25em;
+  margin-right: 0.75em;
+  height: 1px;
+  overflow: visible;
+}
+hr {
+  margin: 0.25rem 0;
+  border: 0;
+  background-color: var(--font-color);
+  height: 1px;
+}
+.show hr::before {
+  background-color: var(--main-color);
+  color: var(--font-color);
+  position: relative;
+  top: -0.6rem;
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  content: '\f078';
+}
+.hide hr::before {
+  background-color: var(--main-color);
+  color: var(--font-color);
+  position: relative;
+  top: -0.9rem;
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  content: '\f077';
+}
+.conceal {
+  display: none;
+}
+.todoCompleted {
+  margin-top: 0.25em;
+  input[type='checkbox'] + label::before {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    text-align: center;
+    content: '\f00c';
+    background-color: var(--checkbox-bg-color);
+  }
+}
+.todoCompleted .todo {
+  background-color: var(--done-color);
+}
+.todoCompleted div span {
+  text-decoration: line-through;
+}
+
+@media (min-width: 1024px) {
+  .todoList {
+    margin-top: 1rem;
+    width: 63rem;
+
+    span {
+      max-width: 90%;
+    }
+  }
+  .todoUncompleted {
+    max-height: 30rem;
+    overflow-y: auto;
+    display: grid;
+
+    grid-template-areas: 'row row';
+    grid-template-columns: 49%;
+    gap: 0.25rem;
+  }
+  .todoCompleted {
+    max-height: 30rem;
+    overflow-y: auto;
+  }
+}

@@ -1,0 +1,50 @@
+.userInput {
+  position: fixed;
+  bottom: 0;
+  left: 0.9em;
+  display: inline-flex;
+  padding: 0.5em 1em;
+  justify-content: center;
+  width: 100%;
+  min-width: 24rem;
+}
+
+input {
+  height: 3rem;
+  border: 0;
+  min-width: 100%;
+}
+
+input:focus {
+  border: 1px solid var(--button-color);
+  outline: none;
+}
+
+button {
+  height: 0;
+  width: 0;
+  position: relative;
+  top: 0.75em;
+  right: 2em;
+  border-top: 0.75em solid transparent;
+  border-left: 1.5em solid var(--button-color);
+  border-bottom: 0.75em solid transparent;
+  border-right: 0;
+}
+
+button:hover {
+  border-top: 0.75em solid transparent;
+  border-left: 1.5em solid var(--checkbox-bg-color);
+  border-bottom: 0.75em solid transparent;
+}
+
+@media (min-width: 1024px) {
+  .userInput {
+    align-content: center;
+    position: static;
+    padding-bottom: 3rem;
+    justify-items: flex-end;
+    width: 100%;
+    max-width: 60rem;
+  }
+}
