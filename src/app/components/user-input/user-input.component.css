@@ -40,10 +40,9 @@ button:hover {
 
 @media (min-width: 1024px) {
   .userInput {
-    align-content: center;
+    justify-content: center;
     position: static;
     padding-bottom: 3rem;
-    justify-items: flex-end;
     width: 100%;
     max-width: 60rem;
   }

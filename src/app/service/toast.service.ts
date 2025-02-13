@@ -7,7 +7,7 @@ export class ToastService {
   currentToast: string[] = [];
   toastHistory: string[] = [];
 
-  enque(toast: string) {
+  enqueue(toast: string) {
     if (this.currentToast.length > 0) {
       this.dequeue();
     }
@@ -33,7 +33,7 @@ export class ToastService {
       this.dequeue();
     }, 1500);
 
-    this.enque(message);
+    this.enqueue(message);
     // this.currentToast.push(message);
     // console.log(message);
     this.toastHistory.unshift(message);
