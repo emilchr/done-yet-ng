@@ -6,7 +6,6 @@
   padding: 0.5em 1em;
   justify-content: center;
   width: 100%;
-  min-width: 32rem;
 }
 
 input {
@@ -45,5 +44,6 @@ button:hover {
     padding-bottom: 3rem;
     width: 100%;
     max-width: 60rem;
+    min-width: 32rem;
   }
 }
