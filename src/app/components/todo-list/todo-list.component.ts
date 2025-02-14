@@ -23,4 +23,17 @@ export class TodoListComponent {
     this.todos = todos.getTodos();
     // console.log(this.todos);
   }
+
+  showCompleted = true;
+  show = 'show';
+  todoCompleted = 'todoCompleted';
+  handleShow() {
+    !this.showCompleted ? (this.show = 'show') : (this.show = 'show hide');
+    !this.showCompleted
+      ? (this.todoCompleted = 'todoCompleted')
+      : (this.todoCompleted = 'conceal');
+    this.showCompleted
+      ? (this.showCompleted = false)
+      : (this.showCompleted = true);
+  }
 }

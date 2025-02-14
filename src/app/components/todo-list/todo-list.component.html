@@ -10,9 +10,9 @@
       }
     }
   </div>
-  <div class="show">
-    <hr />
-    <div class="todoCompleted">
+  <div [className]="show">
+    <hr (click)="handleShow()" />
+    <div [className]="todoCompleted">
       @for (todo of todos; track todo.taskId) {
         @if (todo.isComplete) {
           <app-todo-item
