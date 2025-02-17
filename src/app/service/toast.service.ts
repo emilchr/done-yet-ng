@@ -1,53 +1,39 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  currentToast: string[] = [];
-  toastHistory: string[] = [];
+  toastObservable = new BehaviorSubject('');
 
-  enqueue(toast: string) {
-    if (this.currentToast.length > 0) {
-      this.dequeue();
-    }
-    this.currentToast.push(toast);
-  }
+  toastQueue: string[] = [];
+  enqueue = (message: string) => {
+    this.toastQueue.push(message);
+  };
   dequeue() {
-    if (!this.currentToast.length) {
-      if (!this.toastHistory.length) {
-        console.log('Queue empty');
-        return null;
-      }
-    }
-    return this.currentToast.pop();
+    this.toastQueue.map((toast) => {
+      return console.log('IN QUEUE' + toast);
+    });
   }
-  // toastType = {
-  //   add: 'New todo added!',
-  //   remove: 'Undone!',
-  //   complete: 'Completed!',
-  // };
 
-  showToast(message: any) {
-    const toastTimeout = setTimeout(() => {
-      this.dequeue();
-    }, 1500);
+  showToast(message: string) {
+    const trigger = setTimeout(() => {
+      this.toastObservable.next('');
+    }, 3000);
 
-    this.enqueue(message);
-    // this.currentToast.push(message);
-    // console.log(message);
-    this.toastHistory.unshift(message);
-    //
-    // if (this.toastHistory.length > 0) {
-    //   clearTimeout(toastTimeout);
+    if (this.toastObservable.getValue()) {
+      console.log('Already toasting');
+      this.enqueue(message);
+      // setInterval(() => {
+      //   this.toastObservable.next(message);
+      // }, 3000);
+    }
+    this.dequeue;
 
-    //   setTimeout(() => {
-    //     this.dequeue();
-    //   }, 1500);
-    // }
-    toastTimeout;
+    this.toastObservable.next(message);
+    trigger;
 
-    console.log('currentToast: ' + this.currentToast);
-    console.log('toastHistory: ' + this.toastHistory);
+    console.log(this.toastQueue);
   }
 }

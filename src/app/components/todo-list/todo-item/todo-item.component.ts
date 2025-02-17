@@ -11,11 +11,10 @@ import { TodoData } from '../../../service/todo-list.service';
 })
 export class TodoItemComponent {
   toasting = inject(ToastService);
+  todoService = inject(TodoData);
   @Input() taskId = 0;
   @Input() content = '';
   @Input() isComplete = false;
-
-  todoService = inject(TodoData);
 
   handleClick = () => {
     const newTodo = {

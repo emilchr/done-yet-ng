@@ -16,7 +16,4 @@ import { ToastComponent } from './toast/toast.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-  toasting = inject(ToastService);
-  currentToast = this.toasting.currentToast;
-}
+export class AppComponent {}

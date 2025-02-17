@@ -1,7 +1,5 @@
 <div class="toast-container">
-  <div class="toast">WORKING</div>
-  <div class="toast">WORKING</div>
-  <div class="toast">WORKING</div>
-  <div class="toast">WORKING</div>
-  <div class="toast">WORKING</div>
+  @if (toastDisplay) {
+    <div class="toast">{{ toastDisplay }}</div>
+  }
 </div>
