@@ -17,14 +17,14 @@ export class TodoItemComponent {
   @Input() isComplete = false;
 
   handleClick = () => {
-    const newTodo = {
+    const newStatus = {
       taskId: this.taskId,
       content: this.content,
       isComplete: this.isComplete ? false : true,
     };
-    this.todoService.setStatus(newTodo);
+    this.todoService.setStatus(newStatus);
     this.isComplete
-      ? this.toasting.showToast('Uncompleted?')
-      : this.toasting.showToast('Todo completed!');
+      ? this.toasting.showToast('Marked as undone', 'alert')
+      : this.toasting.showToast('Todo done!', 'correct');
   };
 }

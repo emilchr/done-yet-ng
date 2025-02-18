@@ -1,5 +1,11 @@
 <div class="toast-container">
   @for (toast of toastQueue; track toast.id) {
-    <div class="toast">{{ toast.message }}</div>
+    @if (toast.type === 'error') {
+      <div class="toast error">{{ toast.message }}</div>
+    } @else if (toast.type === 'correct') {
+      <div class="toast">{{ toast.message }}</div>
+    } @else if (toast.type === 'alert') {
+      <div class="toast alert">{{ toast.message }}</div>
+    }
   }
 </div>

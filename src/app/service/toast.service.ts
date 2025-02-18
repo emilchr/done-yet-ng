@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 export interface Toast {
   id: number;
   message: string;
+  type: string;
 }
 
 @Injectable({
@@ -12,12 +13,13 @@ export interface Toast {
 })
 export class ToastService {
   private toastQueueSubject = new BehaviorSubject<Toast[]>([]);
-  toastQueue = this.toastQueueSubject.asObservable(); // Initialize as observable
+  toastQueue = this.toastQueueSubject.asObservable(); // Initialize as observable data stream
 
-  enqueue(message: string) {
+  enqueue(message: string, type: string) {
     const toastObject: Toast = {
       id: Math.floor(Math.random() * 100), // Apply random id to toast
       message: message,
+      type: type,
     };
 
     const currentQueue = this.toastQueueSubject.getValue(); // Get the value from toastQueueSubject
@@ -34,7 +36,7 @@ export class ToastService {
     }, 2000);
   }
 
-  showToast(message: string) {
-    this.enqueue(message);
+  showToast(message: string, type: string) {
+    this.enqueue(message, type);
   }
 }

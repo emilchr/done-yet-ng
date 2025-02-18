@@ -26,6 +26,15 @@
   animation-timing-function: cubic-bezier(0.95, 0.05, 0.795, 0.035);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
+.error {
+  background-color: rgb(238, 70, 70);
+  color: var(--input-background);
+  border-left: 0.5rem solid rgb(173, 0, 0);
+}
+.alert {
+  background-color: rgb(233, 225, 109);
+  border-left: 0.5rem solid rgb(235, 219, 8);
+}
 
 @keyframes toast-animation {
   0% {

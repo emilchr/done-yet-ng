@@ -20,14 +20,17 @@ export class UserInputComponent {
   onSubmit() {
     // console.log(this.inputForm.value.userInput);
     // console.log(typeof this.inputForm.get('userInput')?.value);
+    if (this.inputForm.value.userInput) {
+      this.todoService.addTodo({
+        taskId: Math.floor(Math.random() * 10000),
 
-    this.todoService.addTodo({
-      taskId: Math.floor(Math.random() * 10000),
-
-      content: this.inputForm.value.userInput,
-      isComplete: false,
-    });
-    this.inputForm.reset();
-    this.toast.showToast('Todo created!');
+        content: this.inputForm.value.userInput,
+        isComplete: false,
+      });
+      this.inputForm.reset();
+      this.toast.showToast('Todo created!', 'correct');
+    } else {
+      this.toast.showToast('Not created', 'error');
+    }
   }
 }
