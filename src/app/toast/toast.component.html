@@ -1,5 +1,5 @@
 <div class="toast-container">
-  @if (toastDisplay) {
-    <div class="toast">{{ toastDisplay }}</div>
+  @for (toast of toastQueue; track toast.id) {
+    <div class="toast">{{ toast.message }}</div>
   }
 </div>

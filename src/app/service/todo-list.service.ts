@@ -80,7 +80,7 @@ export class TodoData {
   }
 
   setStatus(currentTodo: Todo) {
-    console.log(currentTodo);
+    // console.log(currentTodo);
     const todoIndex = this.todos.findIndex(
       (todo) => todo.taskId === currentTodo.taskId
     );

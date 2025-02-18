@@ -1,39 +1,36 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+export interface Toast {
+  id: number;
+  message: string;
+}
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  toastObservable = new BehaviorSubject('');
+  // toastObservable = new BehaviorSubject('');
 
-  toastQueue: string[] = [];
+  toastQueue: Toast[] = [];
   enqueue = (message: string) => {
-    this.toastQueue.push(message);
+    const toastObject = {
+      id: Math.floor(Math.random() * 100),
+      message: message,
+    };
+    this.toastQueue.unshift(toastObject);
   };
   dequeue() {
-    this.toastQueue.map((toast) => {
-      return console.log('IN QUEUE' + toast);
-    });
+    setTimeout(() => {
+      // this.toastObservable.next(this.toastQueue[0].message);
+      this.toastQueue.pop();
+    }, 3000);
   }
 
   showToast(message: string) {
-    const trigger = setTimeout(() => {
-      this.toastObservable.next('');
-    }, 3000);
+    this.enqueue(message);
 
-    if (this.toastObservable.getValue()) {
-      console.log('Already toasting');
-      this.enqueue(message);
-      // setInterval(() => {
-      //   this.toastObservable.next(message);
-      // }, 3000);
+    if (this.toastQueue.length > 0) {
+      this.dequeue();
     }
-    this.dequeue;
-
-    this.toastObservable.next(message);
-    trigger;
-
-    console.log(this.toastQueue);
   }
 }
