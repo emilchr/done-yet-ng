@@ -79,6 +79,23 @@ export class TodoData {
     this.todos.push(newTodo);
   }
 
+  reorderTodo = (fromId: number, toId: number) => {
+    let todos = this.getTodos();
+    const fromTodoId = this.getTodo(fromId)?.taskId;
+    const toTodoId = this.getTodo(toId)?.taskId;
+    const fromIndex = todos.findIndex((todo) => todo.taskId === fromTodoId);
+    const toIndex = todos.findIndex((todo) => todo.taskId === toTodoId);
+    console.log(`From id: ${fromTodoId} with index ${fromIndex}`);
+    console.log(`To id: ${toTodoId} with index ${toIndex}`);
+
+    const tempTodo = todos[fromIndex];
+    todos[fromIndex] = todos[toIndex];
+    todos[toIndex] = tempTodo;
+
+    console.log('After reordering');
+    console.log(todos);
+  };
+
   setStatus(currentTodo: Todo) {
     // console.log(currentTodo);
     const todoIndex = this.todos.findIndex(
