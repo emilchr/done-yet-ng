@@ -4,10 +4,7 @@
   flex-direction: column;
   width: 99.6%;
   word-wrap: break-word;
-  .todoUncompleted {
-    
-    
-  }
+
 }
 .todoList span {
   padding: 0 0.25em;
