@@ -17,7 +17,7 @@ export class ToastService {
 
   enqueue(message: string, type: string) {
     const toastObject: Toast = {
-      id: Math.floor(Math.random() * 100), // Apply random id to toast
+      id: Math.floor(Math.random() * 100), // Assign random id to toast
       message: message,
       type: type,
     };
