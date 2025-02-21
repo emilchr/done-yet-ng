@@ -91,9 +91,6 @@ export class TodoData {
     const tempTodo = todos[fromIndex];
     todos[fromIndex] = todos[toIndex];
     todos[toIndex] = tempTodo;
-
-    console.log('After reordering');
-    console.log(todos);
   };
 
   setStatus(currentTodo: Todo) {

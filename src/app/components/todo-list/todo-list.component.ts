@@ -38,4 +38,15 @@ export class TodoListComponent {
       this.showCompleted = false;
     }
   }
+  currentTodo: number = 0;
+  onDrag(taskId: number) {
+    this.currentTodo = taskId;
+    console.log('drag');
+  }
+  onDrop($event: any, taskId: number) {
+    console.log('drop: ' + taskId);
+  }
+  onDragOver($event: any) {
+    console.log('drag over');
+  }
 }

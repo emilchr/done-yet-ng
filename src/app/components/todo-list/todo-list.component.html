@@ -1,24 +1,36 @@
 <div class="todoList">
-  <div class="todoUncompleted">
+  <div
+    class="todoUncompleted"
+    (dragend)="onDragOver($event)"
+    (drop)="onDrop($event, currentTodo)"
+  >
     @for (todo of todos; track todo.taskId) {
       @if (!todo.isComplete) {
         <app-todo-item
           [content]="todo.content"
           [taskId]="todo.taskId"
           [isComplete]="todo.isComplete"
+          (drag)="onDrag(todo.taskId)"
+          draggable="true"
         />
       }
     }
   </div>
   <div [className]="show">
     <hr (click)="handleShow()" />
-    <div [className]="todoCompleted">
+    <div
+      [className]="todoCompleted"
+      (dragend)="onDragOver($event)"
+      (drop)="onDrop($event, currentTodo)"
+    >
       @for (todo of todos; track todo.taskId) {
         @if (todo.isComplete) {
           <app-todo-item
             [content]="todo.content"
             [taskId]="todo.taskId"
             [isComplete]="todo.isComplete"
+            (drag)="onDrag(todo.taskId)"
+            draggable="true"
           />
         }
       }

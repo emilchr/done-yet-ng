@@ -21,8 +21,6 @@ export class AppComponent {
     this.todoReorder = todos.reorderTodo;
   }
   reorderTest() {
-    console.log('Before reordering');
-    console.log(this.todos);
     this.todoReorder(1201, 1);
   }
 }
