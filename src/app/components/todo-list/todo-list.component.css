@@ -5,7 +5,8 @@
   width: 99.6%;
   word-wrap: break-word;
   .todoUncompleted {
-    max-height: 30rem;
+    
+    
   }
 }
 .todoList span {
@@ -54,14 +55,16 @@ hr {
   display: none;
 }
 .todoCompleted {
-  margin-top: 0.25em;
+  margin-top: 0.5em;
+  margin-bottom: 3rem;
+  .todo {
+    background-color: var(--done-color);
+  }
+  div span {
+    text-decoration: line-through;
+  }
 }
-.todoCompleted .todo {
-  background-color: var(--done-color);
-}
-.todoCompleted div span {
-  text-decoration: line-through;
-}
+
 
 @media (min-width: 1024px) {
   .todoList {
