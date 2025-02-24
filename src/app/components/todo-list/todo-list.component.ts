@@ -18,15 +18,18 @@ import { Todo } from './todo.interface';
 })
 export class TodoListComponent {
   todos: Todo[] = [];
+  setStatus;
 
   constructor(todos: TodoData) {
     this.todos = todos.getTodos();
+    this.setStatus = todos.setStatus;
     // console.log(this.todos);
   }
 
   showCompleted = true;
   show = 'show';
   todoCompleted = 'todoCompleted';
+
   handleShow() {
     if (!this.showCompleted) {
       this.show = 'show';
@@ -38,15 +41,22 @@ export class TodoListComponent {
       this.showCompleted = false;
     }
   }
-  currentTodo: number = 0;
-  onDrag(taskId: number) {
-    this.currentTodo = taskId;
-    console.log('drag');
+
+  currentTodo: any;
+
+  onDrag(todo: Todo) {
+    this.currentTodo = todo;
   }
-  onDrop($event: any, taskId: number) {
-    console.log('drop: ' + taskId);
+  onDrop($event: any, todo: Todo) {
+    const newStatus = {
+      taskId: todo.taskId,
+      content: todo.content,
+      isComplete: todo.isComplete ? false : true,
+    };
+    this.setStatus(newStatus);
   }
+
   onDragOver($event: any) {
-    console.log('drag over');
+    $event.preventDefault();
   }
 }

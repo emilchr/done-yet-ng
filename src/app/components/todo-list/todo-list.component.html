@@ -1,7 +1,7 @@
 <div class="todoList">
   <div
     class="todoUncompleted"
-    (dragend)="onDragOver($event)"
+    (dragover)="onDragOver($event)"
     (drop)="onDrop($event, currentTodo)"
   >
     @for (todo of todos; track todo.taskId) {
@@ -10,7 +10,7 @@
           [content]="todo.content"
           [taskId]="todo.taskId"
           [isComplete]="todo.isComplete"
-          (drag)="onDrag(todo.taskId)"
+          (drag)="onDrag(todo)"
           draggable="true"
         />
       }
@@ -18,18 +18,15 @@
   </div>
   <div [className]="show">
     <hr (click)="handleShow()" />
-    <div
-      [className]="todoCompleted"
-      (dragend)="onDragOver($event)"
-      (drop)="onDrop($event, currentTodo)"
-    >
+    <div [className]="todoCompleted" (dragover)="onDragOver($event)">
       @for (todo of todos; track todo.taskId) {
         @if (todo.isComplete) {
           <app-todo-item
             [content]="todo.content"
             [taskId]="todo.taskId"
             [isComplete]="todo.isComplete"
-            (drag)="onDrag(todo.taskId)"
+            (drag)="onDrag(todo)"
+            (drop)="onDrop($event, currentTodo)"
             draggable="true"
           />
         }
