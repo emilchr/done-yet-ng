@@ -99,5 +99,6 @@ export class TodoData {
       (todo) => todo.taskId === currentTodo.taskId
     );
     this.todos[todoIndex].isComplete = currentTodo.isComplete;
+    // todo-related toasts should be called here.
   }
 }

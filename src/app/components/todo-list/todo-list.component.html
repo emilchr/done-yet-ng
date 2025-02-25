@@ -2,7 +2,7 @@
   <div
     class="todoUncompleted"
     (dragover)="onDragOver($event)"
-    (drop)="onDrop($event, currentTodo)"
+    (drop)="onDrop($event, currentTodo, false)"
   >
     @for (todo of todos; track todo.taskId) {
       @if (!todo.isComplete) {
@@ -10,7 +10,7 @@
           [content]="todo.content"
           [taskId]="todo.taskId"
           [isComplete]="todo.isComplete"
-          (drag)="onDrag(todo)"
+          (drag)="onDrag($event, todo)"
           draggable="true"
         />
       }
@@ -25,8 +25,8 @@
             [content]="todo.content"
             [taskId]="todo.taskId"
             [isComplete]="todo.isComplete"
-            (drag)="onDrag(todo)"
-            (drop)="onDrop($event, currentTodo)"
+            (drag)="onDrag($event, todo)"
+            (drop)="onDrop($event, currentTodo, true)"
             draggable="true"
           />
         }
