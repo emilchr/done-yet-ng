@@ -1,10 +1,4 @@
-import {
-  Component,
-  HostListener,
-  ViewEncapsulation,
-  WritableSignal,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { TodoData } from '../../service/todo-list.service';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { Todo } from './todo.interface';

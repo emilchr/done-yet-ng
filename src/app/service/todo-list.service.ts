@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Todo } from '../components/todo-list/todo.interface';
 import { ToastService } from './toast.service';
 @Injectable({
@@ -6,7 +6,6 @@ import { ToastService } from './toast.service';
 })
 export class TodoData {
   toasting = inject(ToastService);
-  isDragging = signal(false);
   private todos: Todo[] = [
     {
       taskId: 0,
