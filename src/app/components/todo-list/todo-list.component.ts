@@ -1,4 +1,10 @@
-import { Component, HostListener, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  ViewEncapsulation,
+  WritableSignal,
+  signal,
+} from '@angular/core';
 import { TodoData } from '../../service/todo-list.service';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { Todo } from './todo.interface';
@@ -12,11 +18,11 @@ import { Todo } from './todo.interface';
 })
 export class TodoListComponent {
   todos: Todo[] = [];
-  setStatus;
+  todoData;
 
   constructor(todos: TodoData) {
     this.todos = todos.getTodos();
-    this.setStatus = todos.setStatus;
+    this.todoData = todos;
     // console.log(this.todos);
   }
 
@@ -38,19 +44,22 @@ export class TodoListComponent {
 
   currentTodo: any;
 
-  onDrag($event: DragEvent, todo: Todo) {
+  onDrag(event: DragEvent, todo: Todo) {
+    event.preventDefault();
     this.currentTodo = todo;
   }
-  onDrop($event: DragEvent, todo: Todo, status: boolean) {
-    const newStatus = {
+  onDrop(event: DragEvent, todo: Todo, status: boolean) {
+    event.preventDefault();
+
+    const newStatus: Todo = {
       taskId: todo.taskId,
       content: todo.content,
       isComplete: status,
     };
-    this.setStatus(newStatus);
+    this.todoData.setStatus(newStatus);
   }
 
-  onDragOver($event: DragEvent) {
-    $event.preventDefault();
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
   }
 }

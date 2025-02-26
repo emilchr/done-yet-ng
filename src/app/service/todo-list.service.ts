@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Todo } from '../components/todo-list/todo.interface';
-
+import { ToastService } from './toast.service';
 @Injectable({
   providedIn: 'root',
 })
 export class TodoData {
+  toasting = inject(ToastService);
+  isDragging = signal(false);
   private todos: Todo[] = [
     {
       taskId: 0,
@@ -77,6 +79,7 @@ export class TodoData {
 
   addTodo(newTodo: Todo) {
     this.todos.push(newTodo);
+    this.toasting.showToast('Todo created!', 'correct');
   }
 
   reorderTodo = (fromId: number, toId: number) => {
@@ -95,10 +98,14 @@ export class TodoData {
 
   setStatus(currentTodo: Todo) {
     // console.log(currentTodo);
+
     const todoIndex = this.todos.findIndex(
       (todo) => todo.taskId === currentTodo.taskId
     );
     this.todos[todoIndex].isComplete = currentTodo.isComplete;
-    // todo-related toasts should be called here.
+
+    currentTodo.isComplete
+      ? this.toasting.showToast('Todo done!', 'correct')
+      : this.toasting.showToast('Marked as undone', 'alert');
   }
 }

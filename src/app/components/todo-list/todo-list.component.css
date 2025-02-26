@@ -4,7 +4,6 @@
   flex-direction: column;
   width: 99.6%;
   word-wrap: break-word;
-
 }
 .todoList span {
   padding: 0 0.25em;
@@ -61,7 +60,6 @@ hr {
     text-decoration: line-through;
   }
 }
-
 
 @media (min-width: 1024px) {
   .todoList {

@@ -10,7 +10,7 @@ import { TodoData } from '../../service/todo-list.service';
   styleUrl: './user-input.component.css',
 })
 export class UserInputComponent {
-  toast = inject(ToastService);
+  toasting = inject(ToastService);
   todoService = inject(TodoData);
   private formBuilder = inject(FormBuilder);
   inputForm = this.formBuilder.group({
@@ -28,9 +28,8 @@ export class UserInputComponent {
         isComplete: false,
       });
       this.inputForm.reset();
-      this.toast.showToast('Todo created!', 'correct');
     } else {
-      this.toast.showToast('Not created', 'error');
+      this.toasting.showToast('Not created', 'error');
     }
   }
 }

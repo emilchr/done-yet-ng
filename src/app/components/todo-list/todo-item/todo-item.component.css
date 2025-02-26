@@ -12,10 +12,7 @@
   contain: content;
   user-select: none;
 }
-.dragging {
-  opacity: 1;
-  background-color: red;
-}
+
 .todo label {
   height: 2.4em;
 }
