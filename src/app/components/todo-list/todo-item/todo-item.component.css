@@ -17,6 +17,7 @@
   text-wrap: nowrap;
   max-height: 2.9rem;
   max-width: 18.5rem;
+  transform: translateX(-1000px);
   label {
     position: absolute;
     right: 0;
@@ -24,7 +25,6 @@
 }
 .todoComplete {
   background-color: var(--done-color);
-
   text-decoration: line-through;
 }
 .todo label {
