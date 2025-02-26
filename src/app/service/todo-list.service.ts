@@ -96,15 +96,19 @@ export class TodoData {
   };
 
   setStatus(currentTodo: Todo) {
-    // console.log(currentTodo);
+    const oldTodo = this.getTodo(currentTodo.taskId);
+    if (currentTodo.isComplete == oldTodo?.isComplete) {
+      // Checks if the new status and the old status is similar.
+      this.toasting.showToast('No change', 'alert');
+    } else {
+      currentTodo.isComplete
+        ? this.toasting.showToast('Todo done!', 'correct')
+        : this.toasting.showToast('Marked as undone', 'alert');
+    }
 
     const todoIndex = this.todos.findIndex(
       (todo) => todo.taskId === currentTodo.taskId
     );
     this.todos[todoIndex].isComplete = currentTodo.isComplete;
-
-    currentTodo.isComplete
-      ? this.toasting.showToast('Todo done!', 'correct')
-      : this.toasting.showToast('Marked as undone', 'alert');
   }
 }

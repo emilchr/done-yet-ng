@@ -11,6 +11,8 @@
           [taskId]="todo.taskId"
           [isComplete]="todo.isComplete"
           (drag)="onDrag($event, todo)"
+          (dragstart)="onStart($event, todo)"
+          (dragend)="onDragEnd($event)"
           draggable="true"
         />
       }
@@ -26,6 +28,8 @@
             [taskId]="todo.taskId"
             [isComplete]="todo.isComplete"
             (drag)="onDrag($event, todo)"
+            (dragstart)="onStart($event, todo)"
+            (dragend)="onDragEnd($event)"
             (drop)="onDrop($event, currentTodo, true)"
             draggable="true"
           />

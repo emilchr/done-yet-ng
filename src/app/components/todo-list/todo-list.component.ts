@@ -38,6 +38,21 @@ export class TodoListComponent {
 
   currentTodo: any;
 
+  onStart(event: DragEvent, todo: Todo) {
+    this.currentTodo = todo;
+    const cloneDiv = document.createElement('div');
+    const span = document.createElement('span');
+    cloneDiv.innerHTML = `<span>${todo.content}</span><input name="checkbox" type="checkbox" ${todo.isComplete ? 'checked="true"' : ''}/> <label for="checkbox"></label>`;
+
+    cloneDiv.className = 'todo';
+    todo.isComplete && cloneDiv.classList.add('todoComplete');
+    cloneDiv.id = 'dragging';
+
+    document.body.appendChild(cloneDiv).appendChild(span);
+
+    event.dataTransfer?.setDragImage(cloneDiv, 0, 0);
+  }
+
   onDrag(event: DragEvent, todo: Todo) {
     event.preventDefault();
     this.currentTodo = todo;
@@ -55,5 +70,11 @@ export class TodoListComponent {
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
+  }
+
+  onDragEnd(event: DragEvent) {
+    event.preventDefault();
+    const cloneDiv = document.getElementById('dragging') as Element;
+    document.body.removeChild(cloneDiv);
   }
 }

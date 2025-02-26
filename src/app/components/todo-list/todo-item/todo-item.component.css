@@ -12,7 +12,21 @@
   contain: content;
   user-select: none;
 }
+#dragging {
+  overflow-y: hidden;
+  text-wrap: nowrap;
+  max-height: 2.9rem;
+  max-width: 18.5rem;
+  label {
+    position: absolute;
+    right: 0;
+  }
+}
+.todoComplete {
+  background-color: var(--done-color);
 
+  text-decoration: line-through;
+}
 .todo label {
   height: 2.4em;
 }
