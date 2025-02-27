@@ -32,6 +32,13 @@ span {
     position: absolute;
     right: 0;
   }
+  span::before {
+    display: inline-flex;
+    margin-right: 1rem;
+  }
+  label {
+    display: none;
+  }
 }
 .todoComplete {
   background-color: var(--done-color);
