@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { TodoData } from '../../service/todo-list.service';
+import { TodoService } from '../../service/todo-list.service';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { Todo } from './todo.interface';
 
@@ -12,11 +12,11 @@ import { Todo } from './todo.interface';
 })
 export class TodoListComponent {
   todos: Todo[] = [];
-  todoData;
+  todoService;
 
-  constructor(todos: TodoData) {
+  constructor(todos: TodoService) {
     this.todos = todos.getTodos(); // Gets the todo list from todo service
-    this.todoData = todos; // Binds the service to this.todoData.
+    this.todoService = todos; // Binds the service to this.todoService.
     // console.log(this.todos);
   }
 
@@ -55,7 +55,7 @@ export class TodoListComponent {
 
     // Executes only if user is on a device with width larger than 1024px. setDragImage is not supported on mobile devices.
     if (window.innerWidth > 1024) {
-      event.dataTransfer?.setDragImage(cloneDiv, 0, 0);
+      event.dataTransfer?.setDragImage(cloneDiv, 50, 20);
     }
   }
 
@@ -74,7 +74,7 @@ export class TodoListComponent {
       content: todo.content,
       isComplete: status,
     };
-    this.todoData.setStatus(newStatus);
+    this.todoService.setStatus(newStatus);
   }
   // Prevents default behavior.
   onDragOver(event: DragEvent) {
@@ -90,7 +90,7 @@ export class TodoListComponent {
 
   // Rearranges todo with same status.
   reArrangeDrop(event: Event, todo: Todo) {
-    this.todoData.reorderTodo(todo.taskId, this.rearrangeTodo.taskId);
+    this.todoService.reorderTodo(todo.taskId, this.rearrangeTodo.taskId);
     // console.log(`Rearranging ${todo.taskId} with ${this.rearrangeTodo.taskId}`);
   }
 

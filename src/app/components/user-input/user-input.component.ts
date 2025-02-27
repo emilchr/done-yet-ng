@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ToastService } from '../../service/toast.service';
-import { TodoData } from '../../service/todo-list.service';
+import { TodoService } from '../../service/todo-list.service';
 
 @Component({
   selector: 'app-user-input',
@@ -11,7 +11,7 @@ import { TodoData } from '../../service/todo-list.service';
 })
 export class UserInputComponent {
   toasting = inject(ToastService);
-  todoService = inject(TodoData);
+  todoService = inject(TodoService);
   private formBuilder = inject(FormBuilder);
   inputForm = this.formBuilder.group({
     userInput: [''],

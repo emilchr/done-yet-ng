@@ -12,6 +12,16 @@
   contain: content;
   user-select: none;
 }
+span::before {
+  content: '\f58e';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 600;
+  opacity: 0.3;
+  margin-right: 0.5rem;
+}
+span {
+  margin-left: 0.25rem;
+}
 #dragging {
   overflow-y: hidden;
   text-wrap: nowrap;

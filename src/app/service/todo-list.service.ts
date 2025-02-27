@@ -4,8 +4,10 @@ import { ToastService } from './toast.service';
 @Injectable({
   providedIn: 'root',
 })
-export class TodoData {
-  toasting = inject(ToastService);
+export class TodoService {
+  //
+  toastService = inject(ToastService);
+
   private todos: Todo[] = [
     {
       taskId: 0,
@@ -68,21 +70,27 @@ export class TodoData {
       isComplete: false,
     },
   ];
+
+  // Returns the whole todo list
   getTodos() {
     return this.todos;
   }
 
+  // Returns a spesific todo
   getTodo(taskId: number) {
     return this.todos.find((todo) => taskId === todo.taskId);
   }
 
+  // Adds todo to the list and toasts
   addTodo(newTodo: Todo) {
     this.todos.push(newTodo);
-    this.toasting.showToast('Todo created!', 'correct');
+    this.toastService.showToast('Todo created!', 'correct');
   }
 
+  // Stores new index of the todo, if it has been rearranged. Otherwise undefined.
   newIndex: any;
 
+  // Reorder todo
   reorderTodo = (fromId: number, toId: number) => {
     let todos = this.getTodos();
     const fromTodoId = this.getTodo(fromId)?.taskId;
@@ -93,34 +101,41 @@ export class TodoData {
     const tempTodo = todos[fromIndex];
     todos[fromIndex] = todos[toIndex];
     todos[toIndex] = tempTodo;
+
+    // Sets newIndex to the new index that was given.
     this.newIndex = toIndex;
   };
 
   setStatus(currentTodo: Todo) {
+    // Sets the old and new index in the list
     const oldTodo = this.getTodo(currentTodo.taskId);
     const oldIndex = this.todos.findIndex(
       (todo: Todo) => todo.taskId === oldTodo?.taskId
     );
 
-    console.log(`Old ${oldIndex} and new ${this.newIndex}`);
+    // console.log(`Old ${oldIndex} and new ${this.newIndex}`);
     // Checks if the todo has been reordered and if the status is the same.
     if (
       oldIndex !== this.newIndex &&
       currentTodo.isComplete == oldTodo?.isComplete
     ) {
-      this.toasting.showToast('Rearranging!', 'correct');
+      console.log('\u{f24d}');
+      this.toastService.showToast(' Rearranged!', 'correct');
     } else if (currentTodo.isComplete == oldTodo?.isComplete) {
       // Checks if the new status and the old status is similar.
-      this.toasting.showToast('No change', 'alert');
+      this.toastService.showToast('No change', 'alert');
     } else {
+      // Displays toast based on status.
       currentTodo.isComplete
-        ? this.toasting.showToast('Todo done!', 'correct')
-        : this.toasting.showToast('Marked as undone', 'alert');
+        ? this.toastService.showToast('Todo done!', 'correct')
+        : this.toastService.showToast('Marked as undone', 'alert');
     }
 
+    // Sets the index of the current todo.
     const todoIndex = this.todos.findIndex(
       (todo) => todo.taskId === currentTodo.taskId
     );
+    // Markes todo status to true (completed) or false (not completed)
     this.todos[todoIndex].isComplete = currentTodo.isComplete;
   }
 }
