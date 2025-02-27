@@ -81,6 +81,8 @@ export class TodoData {
     this.toasting.showToast('Todo created!', 'correct');
   }
 
+  newIndex: any;
+
   reorderTodo = (fromId: number, toId: number) => {
     let todos = this.getTodos();
     const fromTodoId = this.getTodo(fromId)?.taskId;
@@ -91,13 +93,24 @@ export class TodoData {
     const tempTodo = todos[fromIndex];
     todos[fromIndex] = todos[toIndex];
     todos[toIndex] = tempTodo;
+    this.newIndex = toIndex;
   };
 
   setStatus(currentTodo: Todo) {
     const oldTodo = this.getTodo(currentTodo.taskId);
-    if (currentTodo.isComplete == oldTodo?.isComplete) {
-      // Checks if the new status and the old status is similar.
+    const oldIndex = this.todos.findIndex(
+      (todo: Todo) => todo.taskId === oldTodo?.taskId
+    );
 
+    console.log(`Old ${oldIndex} and new ${this.newIndex}`);
+    // Checks if the todo has been reordered and if the status is the same.
+    if (
+      oldIndex !== this.newIndex &&
+      currentTodo.isComplete == oldTodo?.isComplete
+    ) {
+      this.toasting.showToast('Rearranging!', 'correct');
+    } else if (currentTodo.isComplete == oldTodo?.isComplete) {
+      // Checks if the new status and the old status is similar.
       this.toasting.showToast('No change', 'alert');
     } else {
       currentTodo.isComplete

@@ -20,7 +20,4 @@ export class AppComponent {
     // console.log(this.todos);
     this.todoReorder = todos.reorderTodo;
   }
-  reorderTest() {
-    this.todoReorder(1201, 1);
-  }
 }

@@ -15,8 +15,8 @@ export class TodoListComponent {
   todoData;
 
   constructor(todos: TodoData) {
-    this.todos = todos.getTodos();
-    this.todoData = todos;
+    this.todos = todos.getTodos(); // Gets the todo list from todo service
+    this.todoData = todos; // Binds the service to this.todoData.
     // console.log(this.todos);
   }
 
@@ -24,6 +24,7 @@ export class TodoListComponent {
   show = 'show';
   todoCompleted = 'todoCompleted';
 
+  // Handles the show and hide feature for completed todos.
   handleShow() {
     if (!this.showCompleted) {
       this.show = 'show';
@@ -39,6 +40,7 @@ export class TodoListComponent {
   currentTodo: any;
   rearrangeTodo: any;
 
+  // Creates a ghost element for dragging-style.
   onStart(event: DragEvent, todo: Todo) {
     this.currentTodo = todo;
     const cloneDiv = document.createElement('div');
@@ -51,16 +53,19 @@ export class TodoListComponent {
 
     document.body.appendChild(cloneDiv).appendChild(span);
 
+    // Executes only if user is on a device with width larger than 1024px. setDragImage is not supported on mobile devices.
     if (window.innerWidth > 1024) {
-      // Runs only if user is on a desktop. setDragImage is not supported on mobile devices.
       event.dataTransfer?.setDragImage(cloneDiv, 0, 0);
     }
   }
 
+  // Sets currentTodo to the todo thats being dragged.
   onDrag(event: DragEvent, todo: Todo) {
     event.preventDefault();
     this.currentTodo = todo;
   }
+
+  // Sets a new status for the todo thats being dropped.
   onDrop(event: DragEvent, todo: Todo, status: boolean) {
     event.preventDefault();
 
@@ -71,20 +76,25 @@ export class TodoListComponent {
     };
     this.todoData.setStatus(newStatus);
   }
-
+  // Prevents default behavior.
   onDragOver(event: DragEvent) {
     event.preventDefault();
   }
 
+  // Removes ghost image-element when dragging stops.
   onDragEnd(event: DragEvent) {
     event.preventDefault();
     const cloneDiv = document.getElementById('dragging') as Element;
     document.body.removeChild(cloneDiv);
   }
+
+  // Rearranges todo with same status.
   reArrangeDrop(event: Event, todo: Todo) {
     this.todoData.reorderTodo(todo.taskId, this.rearrangeTodo.taskId);
-    console.log(`Rearranging ${todo.taskId} with ${this.rearrangeTodo.taskId}`);
+    // console.log(`Rearranging ${todo.taskId} with ${this.rearrangeTodo.taskId}`);
   }
+
+  // Sets rearrangeTodo to the todo thats being rearranged.
   onMouseEnter(event: Event, todo: Todo) {
     this.rearrangeTodo = todo;
   }
