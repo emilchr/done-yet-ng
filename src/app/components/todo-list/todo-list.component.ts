@@ -37,6 +37,7 @@ export class TodoListComponent {
   }
 
   currentTodo: any;
+  rearrangeTodo: any;
 
   onStart(event: DragEvent, todo: Todo) {
     this.currentTodo = todo;
@@ -79,5 +80,12 @@ export class TodoListComponent {
     event.preventDefault();
     const cloneDiv = document.getElementById('dragging') as Element;
     document.body.removeChild(cloneDiv);
+  }
+  reArrangeDrop(event: Event, todo: Todo) {
+    this.todoData.reorderTodo(todo.taskId, this.rearrangeTodo.taskId);
+    console.log(`Rearranging ${todo.taskId} with ${this.rearrangeTodo.taskId}`);
+  }
+  onMouseEnter(event: Event, todo: Todo) {
+    this.rearrangeTodo = todo;
   }
 }

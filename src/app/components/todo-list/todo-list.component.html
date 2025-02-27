@@ -13,6 +13,9 @@
           (drag)="onDrag($event, todo)"
           (dragstart)="onStart($event, todo)"
           (dragend)="onDragEnd($event)"
+          (mouseenter)="onMouseEnter($event, todo)"
+          (touchstart)="onMouseEnter($event, todo)"
+          (drop)="reArrangeDrop($event, todo)"
           draggable="true"
         />
       }
@@ -31,6 +34,9 @@
             (dragstart)="onStart($event, todo)"
             (dragend)="onDragEnd($event)"
             (drop)="onDrop($event, currentTodo, true)"
+            (mouseenter)="onMouseEnter($event, todo)"
+            (touchstart)="onMouseEnter($event, todo)"
+            (drop)="reArrangeDrop($event, todo)"
             draggable="true"
           />
         }
