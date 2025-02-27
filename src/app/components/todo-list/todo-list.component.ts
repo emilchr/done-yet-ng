@@ -50,7 +50,10 @@ export class TodoListComponent {
 
     document.body.appendChild(cloneDiv).appendChild(span);
 
-    event.dataTransfer?.setDragImage(cloneDiv, 0, 0);
+    if (window.innerWidth > 1024) {
+      // Runs only if user is on a desktop. setDragImage is not supported on mobile devices.
+      event.dataTransfer?.setDragImage(cloneDiv, 0, 0);
+    }
   }
 
   onDrag(event: DragEvent, todo: Todo) {
