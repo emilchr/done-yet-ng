@@ -1,4 +1,9 @@
 <form class="userInput" [formGroup]="inputForm" (ngSubmit)="onSubmit()">
-  <input type="text" name="userInput" formControlName="userInput" />
+  <input
+    type="text"
+    name="userInput"
+    autocomplete="off"
+    formControlName="userInput"
+  />
   <button type="submit" (submit)="$event.preventDefault()"></button>
 </form>
