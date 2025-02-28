@@ -119,8 +119,7 @@ export class TodoService {
       oldIndex !== this.newIndex &&
       currentTodo.isComplete == oldTodo?.isComplete
     ) {
-      console.log('\u{f24d}');
-      this.toastService.showToast(' Rearranged!', 'correct');
+      this.toastService.showToast('Rearranged!', 'correct');
     } else if (currentTodo.isComplete == oldTodo?.isComplete) {
       // Checks if the new status and the old status is similar.
       this.toastService.showToast('No change', 'alert');

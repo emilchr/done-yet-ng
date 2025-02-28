@@ -10,15 +10,16 @@
 
 .toast {
   border-radius: 0.25em;
-  font-size: 2em;
+  font-size: 1.7rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+
   height: 6rem;
   width: 23rem;
   margin-top: 1rem;
+  padding-left: 1.5rem;
   z-index: 1000;
-
   background-color: var(--done-color);
   filter: opacity(0.95);
   border-left: 0.5rem solid var(--checkbox-bg-color);

@@ -1,11 +1,23 @@
 <div class="toast-container">
   @for (toast of toastQueue; track toast.id) {
     @if (toast.type === 'error') {
-      <div class="toast error">{{ toast.message }}</div>
+      <div class="toast error">
+        <i class="fa-solid fa-xmark"></i> {{ toast.message }}
+      </div>
     } @else if (toast.type === 'correct') {
-      <div class="toast">{{ toast.message }}</div>
+      <div class="toast">
+        <i class="fa-solid fa-check"></i> {{ toast.message }}
+      </div>
     } @else if (toast.type === 'alert') {
-      <div class="toast alert">{{ toast.message }}</div>
+      <div class="toast alert">
+        <i class="fa-solid fa-triangle-exclamation"></i> {{ toast.message }}
+      </div>
     }
   }
+  <div class="toast alert">
+    <i class="fa-solid fa-triangle-exclamation"></i> Marked as undone
+  </div>
+  <div class="toast error"><i class="fa-solid fa-xmark"></i> Not created</div>
+  <div class="toast"><i class="fa-solid fa-check"></i> Todo done</div>
+  <div class="toast"><i class="fa-solid fa-check"></i> Todo created</div>
 </div>
