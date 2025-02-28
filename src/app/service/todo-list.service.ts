@@ -87,6 +87,10 @@ export class TodoService {
     this.toastService.showToast('Todo created!', 'correct');
   }
 
+  // Edit todo
+  editTodo(todo: Todo) {
+    const currentTodo = this.getTodo(todo.taskId);
+  }
   // Stores new index of the todo, if it has been rearranged. Otherwise undefined.
   newIndex: any;
 

@@ -1,6 +1,7 @@
 import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
 
 import { TodoService } from '../../../service/todo-list.service';
+import { Todo } from '../todo.interface';
 
 @Component({
   selector: 'app-todo-item',
@@ -16,11 +17,19 @@ export class TodoItemComponent {
   @Input() isComplete = false;
 
   handleClick = () => {
-    const newStatus = {
+    const newStatus: Todo = {
       taskId: this.taskId,
       content: this.content,
       isComplete: this.isComplete ? false : true,
     };
     this.todoService.setStatus(newStatus);
   };
+
+  handleEdit(todo: Todo, newValue: string) {
+    const newTodo: Todo = {
+      ...todo,
+      content: newValue,
+    };
+    this.todoService.editTodo(newTodo);
+  }
 }

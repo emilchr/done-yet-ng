@@ -11,6 +11,10 @@
   align-items: center;
   contain: content;
   user-select: none;
+  input {
+    background: none;
+    width: 100%;
+  }
 }
 span::before {
   content: '\f58e';
