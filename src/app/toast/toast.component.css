@@ -13,7 +13,7 @@
   font-size: 1.7rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
 
   height: 6rem;
   width: 23rem;
@@ -26,6 +26,9 @@
   animation: toast-animation 500ms;
   animation-timing-function: cubic-bezier(0.95, 0.05, 0.795, 0.035);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  i {
+    padding-right: 2.5rem;
+  }
 }
 .error {
   background-color: rgb(238, 70, 70);
