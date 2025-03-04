@@ -57,7 +57,7 @@ hr {
   .todo {
     background-color: var(--done-color);
   }
-  div span {
+  div input {
     text-decoration: line-through;
   }
 }

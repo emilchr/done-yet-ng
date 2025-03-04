@@ -97,5 +97,6 @@ export class TodoListComponent {
   // Sets rearrangeTodo to the todo thats being rearranged.
   onMouseEnter(event: Event, todo: Todo) {
     this.rearrangeTodo = todo;
+    // console.log(todo.taskId);
   }
 }

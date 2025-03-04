@@ -13,6 +13,7 @@
   user-select: none;
   input {
     background: none;
+    margin-left: 0.15rem;
     width: 100%;
   }
 }

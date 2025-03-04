@@ -88,8 +88,12 @@ export class TodoService {
   }
 
   // Edit todo
-  editTodo(todo: Todo) {
-    const currentTodo = this.getTodo(todo.taskId);
+  editTodo(taskId: any, newContent: any) {
+    const currentTodo = this.getTodo(taskId);
+    console.log(newContent);
+    if (currentTodo) {
+      currentTodo.content = newContent;
+    }
   }
   // Stores new index of the todo, if it has been rearranged. Otherwise undefined.
   newIndex: any;
