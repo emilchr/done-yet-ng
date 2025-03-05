@@ -97,14 +97,13 @@ export class TodoService {
   // Edit todo
   editTodo(currentTodo: Todo, newContent: string) {
     const todos = this.getTodos();
-    // console.log(newContent);
-    // if (currentTodo) {
-    //   currentTodo.content = newContent;
-    // }
+
     const updatedArray = todos.map((todo) => {
+      // If the taskId is correct, edit the todo.
       if (todo.taskId === currentTodo.taskId) {
         return { ...todo, content: newContent };
       }
+      // Return the updated todo.
       return todo;
     });
     // Markes todo status to true (completed) or false (not completed) and sends the new updated array to the behaviorSubject this.todos.

@@ -28,8 +28,7 @@ export class TodoItemComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    // console.log(this.content);
-    // this.contentInput.setValue(this.content);
+    // sets the content value of the input to the content of the todo.
     this.contentForm.setValue({ contentInput: this.content });
   }
 
@@ -37,18 +36,18 @@ export class TodoItemComponent implements OnInit {
     const newStatus: Todo = {
       taskId: this.taskId,
       content: this.content,
-      isComplete: this.isComplete ? false : true,
+      isComplete: this.isComplete ? false : true, // Chooses the status based on what the previous status was
     };
     this.todoService.setStatus(newStatus);
   };
 
   handleEdit(taskId: number) {
-    const currentTodo = this.todoService.getTodo(taskId);
+    const currentTodo = this.todoService.getTodo(taskId); // Retrieves the todo
     if (this.contentForm.value.contentInput) {
+      // If there is any value in the input field, assign the new value to newConent.
       const newContent = this.contentForm.value.contentInput;
 
-      // console.log(this.contentInput.value);
-
+      // If the task id is correct pass along the data to the todo service.
       if (currentTodo?.taskId === taskId) {
         this.todoService.editTodo(currentTodo, newContent);
       }
