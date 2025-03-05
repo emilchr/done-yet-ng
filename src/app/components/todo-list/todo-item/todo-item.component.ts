@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TodoService } from '../../../service/todo-list.service';
 import { Todo } from '../todo.interface';
 
@@ -22,10 +22,15 @@ export class TodoItemComponent implements OnInit {
   @Input() taskId: any;
   @Input() content: any;
   @Input() isComplete = false;
+  private formBuilder = inject(FormBuilder);
+  contentForm = this.formBuilder.group({
+    contentInput: [''],
+  });
 
   ngOnInit(): void {
     // console.log(this.content);
-    this.contentForm.setValue(this.content);
+    // this.contentInput.setValue(this.content);
+    this.contentForm.setValue({ contentInput: this.content });
   }
 
   handleClick = () => {
@@ -37,9 +42,16 @@ export class TodoItemComponent implements OnInit {
     this.todoService.setStatus(newStatus);
   };
 
-  contentForm = new FormControl('');
+  handleEdit(taskId: number) {
+    const currentTodo = this.todoService.getTodo(taskId);
+    if (this.contentForm.value.contentInput) {
+      const newContent = this.contentForm.value.contentInput;
 
-  handleEdit(taskId: number, newValue: string) {
-    this.todoService.editTodo(taskId, newValue);
+      // console.log(this.contentInput.value);
+
+      if (currentTodo?.taskId === taskId) {
+        this.todoService.editTodo(currentTodo, newContent);
+      }
+    }
   }
 }

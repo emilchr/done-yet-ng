@@ -95,12 +95,20 @@ export class TodoService {
   }
 
   // Edit todo
-  editTodo(taskId: any, newContent: any) {
-    const currentTodo = this.getTodo(taskId);
-    console.log(newContent);
-    if (currentTodo) {
-      currentTodo.content = newContent;
-    }
+  editTodo(currentTodo: Todo, newContent: string) {
+    const todos = this.getTodos();
+    // console.log(newContent);
+    // if (currentTodo) {
+    //   currentTodo.content = newContent;
+    // }
+    const updatedArray = todos.map((todo) => {
+      if (todo.taskId === currentTodo.taskId) {
+        return { ...todo, content: newContent };
+      }
+      return todo;
+    });
+    // Markes todo status to true (completed) or false (not completed) and sends the new updated array to the behaviorSubject this.todos.
+    this.todos.next(updatedArray);
   }
   // Stores new index of the todo, if it has been rearranged. Otherwise undefined.
   newIndex: any;

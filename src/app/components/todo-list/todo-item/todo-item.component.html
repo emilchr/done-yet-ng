@@ -1,12 +1,12 @@
 <div class="todo" id="{{ taskId }}">
   <span></span>
-  <form class="todo">
+  <form class="todo" [formGroup]="contentForm">
     <input
       type="text"
       name="content"
       autocomplete="off"
-      [formControl]="contentForm"
-      (change)="handleEdit(taskId, content)"
+      formControlName="contentInput"
+      (change)="handleEdit(taskId)"
     />
     <input name="checkbox" type="checkbox" [checked]="isComplete" />
     <label for="checkbox" (click)="handleClick()"></label>
