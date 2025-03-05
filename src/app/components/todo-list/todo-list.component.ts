@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TodoService } from '../../service/todo-list.service';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { Todo } from './todo.interface';
@@ -10,14 +10,20 @@ import { Todo } from './todo.interface';
   styleUrl: './todo-list.component.css',
   encapsulation: ViewEncapsulation.None,
 })
-export class TodoListComponent {
+export class TodoListComponent implements OnInit {
   todos: Todo[] = [];
   todoService;
-
-  constructor(todos: TodoService) {
-    this.todos = todos.getTodos(); // Gets the todo list from todo service
-    this.todoService = todos; // Binds the service to this.todoService.
+  constructor(todoService: TodoService) {
+    // this.todos = todos.getTodos();
+    this.todoService = todoService; // Binds the service to this.todoService.
     // console.log(this.todos);
+  }
+
+  ngOnInit(): void {
+    // Gets the todo list from todo service
+    this.todoService.todos.subscribe((todos) => {
+      return (this.todos = todos);
+    });
   }
 
   showCompleted = true;

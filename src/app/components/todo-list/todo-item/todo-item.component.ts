@@ -24,7 +24,7 @@ export class TodoItemComponent implements OnInit {
   @Input() isComplete = false;
 
   ngOnInit(): void {
-    console.log(this.content);
+    // console.log(this.content);
     this.contentForm.setValue(this.content);
   }
 

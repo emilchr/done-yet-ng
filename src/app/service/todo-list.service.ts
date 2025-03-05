@@ -1,4 +1,5 @@
 import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Todo } from '../components/todo-list/todo.interface';
 import { ToastService } from './toast.service';
 @Injectable({
@@ -8,7 +9,7 @@ export class TodoService {
   //
   toastService = inject(ToastService);
 
-  private todos: Todo[] = [
+  todos = new BehaviorSubject<Todo[]>([
     {
       taskId: 0,
       content: 'Removing the wet weather',
@@ -69,21 +70,27 @@ export class TodoService {
       content: 'Add functionality to the show/hide button',
       isComplete: false,
     },
-  ];
+  ]);
 
   // Returns the whole todo list
   getTodos() {
-    return this.todos;
+    return this.todos.getValue();
   }
 
   // Returns a spesific todo
   getTodo(taskId: number) {
-    return this.todos.find((todo) => taskId === todo.taskId);
+    const todos = this.todos.getValue();
+
+    return todos.find((todo) => taskId === todo.taskId);
   }
 
   // Adds todo to the list and toasts
   addTodo(newTodo: Todo) {
-    this.todos.push(newTodo);
+    const originalArray = this.todos.getValue();
+
+    const newArray = [...originalArray, newTodo];
+    this.todos.next(newArray); // Updates old array, with new todo.
+
     this.toastService.showToast('Todo created!', 'correct');
   }
 
@@ -116,12 +123,12 @@ export class TodoService {
 
   setStatus(currentTodo: Todo) {
     // Sets the old and new index in the list
-    const oldTodo = this.getTodo(currentTodo.taskId);
-    const oldIndex = this.todos.findIndex(
+    const todos = this.getTodos();
+    const oldTodo = this.getTodo(currentTodo.taskId); // retrieves the old Todo
+    const oldIndex = todos.findIndex(
       (todo: Todo) => todo.taskId === oldTodo?.taskId
-    );
+    ); // Sets the index of the old todo.
 
-    // console.log(`Old ${oldIndex} and new ${this.newIndex}`);
     // Checks if the todo has been reordered and if the status is the same.
     if (
       oldIndex !== this.newIndex &&
@@ -138,11 +145,13 @@ export class TodoService {
         : this.toastService.showToast('Marked as undone', 'alert');
     }
 
-    // Sets the index of the current todo.
-    const todoIndex = this.todos.findIndex(
-      (todo) => todo.taskId === currentTodo.taskId
-    );
-    // Markes todo status to true (completed) or false (not completed)
-    this.todos[todoIndex].isComplete = currentTodo.isComplete;
+    const newArray = todos.map((todo) => {
+      if (todo.taskId === currentTodo.taskId) {
+        return { ...todo, isComplete: currentTodo.isComplete };
+      }
+      return todo;
+    });
+    // Markes todo status to true (completed) or false (not completed) and sends the new updated array to the behaviorSubject this.todos.
+    this.todos.next(newArray);
   }
 }
