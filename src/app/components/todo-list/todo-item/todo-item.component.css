@@ -16,6 +16,9 @@
     margin-left: 0.15rem;
     width: 100%;
   }
+  input:focus {
+    outline: 1px var(--input-background) solid;
+  }
 }
 span::before {
   content: '\f58e';
