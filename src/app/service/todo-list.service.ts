@@ -11,64 +11,76 @@ export class TodoService {
 
   todos = new BehaviorSubject<Todo[]>([
     {
-      taskId: 0,
-      content: 'Removing the wet weather',
+      id: 0,
+      todo: 'Removing the wet weather',
       isComplete: false,
+      userId: 1,
     },
     {
-      taskId: 1,
-      content: 'Adding soap to the rain',
+      id: 1,
+      todo: 'Adding soap to the rain',
       isComplete: false,
+      userId: 1,
     },
     {
-      taskId: 2,
-      content: 'Closing down shop',
+      id: 2,
+      todo: 'Closing down shop',
       isComplete: false,
+      userId: 1,
     },
     {
-      taskId: 3,
-      content: 'Marking a todo as done',
+      id: 3,
+      todo: 'Marking a todo as done',
       isComplete: true,
+      userId: 1,
     },
     {
-      taskId: 4,
-      content: 'Fill up editor',
+      id: 4,
+      todo: 'Fill up editor',
       isComplete: false,
+      userId: 1,
     },
     {
-      taskId: 5,
-      content: 'Celebrate your victory',
+      id: 5,
+      todo: 'Celebrate your victory',
       isComplete: true,
+      userId: 1,
     },
     {
-      taskId: 42,
-      content: 'Total and utter destruction of Pluto',
+      id: 42,
+      todo: 'Total and utter destruction of Pluto',
       isComplete: true,
+      userId: 1,
     },
     {
-      taskId: 1337,
-      content: 'Make someone say my name',
+      id: 1337,
+      todo: 'Make someone say my name',
       isComplete: false,
+      userId: 1,
     },
     {
-      taskId: 1306,
-      content: 'Making the checkbox work',
+      id: 1306,
+      todo: 'Making the checkbox work',
       isComplete: true,
+      userId: 1,
     },
     {
-      taskId: 1202,
-      content: 'Adding toasts with a service',
+      id: 1202,
+      todo: 'Adding toasts with a service',
       isComplete: false,
+      userId: 1,
     },
     {
-      taskId: 1201,
-      content: 'Forcing the input to post content',
+      id: 1201,
+      todo: 'Forcing the input to post todo',
       isComplete: true,
+      userId: 1,
     },
     {
-      taskId: 1203,
-      content: 'Add functionality to the show/hide button',
+      id: 1203,
+      todo: 'Add functionality to the show/hide button',
       isComplete: false,
+      userId: 1,
     },
   ]);
 
@@ -78,10 +90,10 @@ export class TodoService {
   }
 
   // Returns a spesific todo
-  getTodo(taskId: number) {
+  getTodo(id: number) {
     const todos = this.todos.getValue();
 
-    return todos.find((todo) => taskId === todo.taskId);
+    return todos.find((todo) => id === todo.id);
   }
 
   // Adds todo to the list and toasts
@@ -95,13 +107,13 @@ export class TodoService {
   }
 
   // Edit todo
-  editTodo(currentTodo: Todo, newContent: string) {
+  editTodo(currentTodo: Todo, newtodo: string) {
     const todos = this.getTodos();
 
     const updatedArray = todos.map((todo) => {
-      // If the taskId is correct, edit the todo.
-      if (todo.taskId === currentTodo.taskId) {
-        return { ...todo, content: newContent };
+      // If the id is correct, edit the todo.
+      if (todo.id === currentTodo.id) {
+        return { ...todo, todo: newtodo };
       }
       // Return the updated todo.
       return todo;
@@ -115,10 +127,10 @@ export class TodoService {
   // Reorder todo
   reorderTodo = (fromId: number, toId: number) => {
     let todos = this.getTodos();
-    const fromTodoId = this.getTodo(fromId)?.taskId;
-    const toTodoId = this.getTodo(toId)?.taskId;
-    const fromIndex = todos.findIndex((todo) => todo.taskId === fromTodoId);
-    const toIndex = todos.findIndex((todo) => todo.taskId === toTodoId);
+    const fromTodoId = this.getTodo(fromId)?.id;
+    const toTodoId = this.getTodo(toId)?.id;
+    const fromIndex = todos.findIndex((todo) => todo.id === fromTodoId);
+    const toIndex = todos.findIndex((todo) => todo.id === toTodoId);
 
     const tempTodo = todos[fromIndex];
     todos[fromIndex] = todos[toIndex];
@@ -131,10 +143,8 @@ export class TodoService {
   setStatus(currentTodo: Todo) {
     // Sets the old and new index in the list
     const todos = this.getTodos();
-    const oldTodo = this.getTodo(currentTodo.taskId); // retrieves the old Todo
-    const oldIndex = todos.findIndex(
-      (todo: Todo) => todo.taskId === oldTodo?.taskId
-    ); // Sets the index of the old todo.
+    const oldTodo = this.getTodo(currentTodo.id); // retrieves the old Todo
+    const oldIndex = todos.findIndex((todo: Todo) => todo.id === oldTodo?.id); // Sets the index of the old todo.
 
     // Checks if the todo has been reordered and if the status is the same.
     if (
@@ -153,7 +163,7 @@ export class TodoService {
     }
 
     const newArray = todos.map((todo) => {
-      if (todo.taskId === currentTodo.taskId) {
+      if (todo.id === currentTodo.id) {
         return { ...todo, isComplete: currentTodo.isComplete };
       }
       return todo;

@@ -22,10 +22,11 @@ export class UserInputComponent {
     // console.log(typeof this.inputForm.get('userInput')?.value);
     if (this.inputForm.value.userInput) {
       this.todoService.addTodo({
-        taskId: Math.floor(Math.random() * 10000),
+        id: Math.floor(Math.random() * 10000),
 
-        content: this.inputForm.value.userInput,
+        todo: this.inputForm.value.userInput,
         isComplete: false,
+        userId: Math.floor(Math.random() * 10),
       });
       this.inputForm.reset();
     } else {

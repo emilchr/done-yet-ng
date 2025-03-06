@@ -51,7 +51,7 @@ export class TodoListComponent implements OnInit {
     this.currentTodo = todo;
     const cloneDiv = document.createElement('div');
     const span = document.createElement('span');
-    cloneDiv.innerHTML = `<span>${todo.content}</span><input name="checkbox" type="checkbox" ${todo.isComplete ? 'checked="true"' : ''}/> <label for="checkbox"></label>`;
+    cloneDiv.innerHTML = `<span>${todo.todo}</span><input name="checkbox" type="checkbox" ${todo.isComplete ? 'checked="true"' : ''}/> <label for="checkbox"></label>`;
 
     cloneDiv.className = 'todo';
     todo.isComplete && cloneDiv.classList.add('todoComplete');
@@ -76,9 +76,10 @@ export class TodoListComponent implements OnInit {
     event.preventDefault();
 
     const newStatus: Todo = {
-      taskId: todo.taskId,
-      content: todo.content,
+      id: todo.id,
+      todo: todo.todo,
       isComplete: status,
+      userId: todo.userId,
     };
     this.todoService.setStatus(newStatus);
   }
@@ -96,13 +97,13 @@ export class TodoListComponent implements OnInit {
 
   // Rearranges todo with same status.
   reArrangeDrop(event: Event, todo: Todo) {
-    this.todoService.reorderTodo(todo.taskId, this.rearrangeTodo.taskId);
-    // console.log(`Rearranging ${todo.taskId} with ${this.rearrangeTodo.taskId}`);
+    this.todoService.reorderTodo(todo.id, this.rearrangeTodo.id);
+    // console.log(`Rearranging ${todo.id} with ${this.rearrangeTodo.id}`);
   }
 
   // Sets rearrangeTodo to the todo thats being rearranged.
   onMouseEnter(event: Event, todo: Todo) {
     this.rearrangeTodo = todo;
-    // console.log(todo.taskId);
+    // console.log(todo.id);
   }
 }
