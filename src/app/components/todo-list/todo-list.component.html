@@ -10,6 +10,7 @@
           [todo]="todo.todo"
           [id]="todo.id"
           [isComplete]="todo.isComplete"
+          [userId]="todo.userId"
           (drag)="onDrag($event, todo)"
           (dragstart)="onStart($event, todo)"
           (dragend)="onDragEnd($event)"

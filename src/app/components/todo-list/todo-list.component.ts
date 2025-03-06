@@ -24,6 +24,7 @@ export class TodoListComponent implements OnInit {
     this.todoService.todos.subscribe((todos) => {
       return (this.todos = todos);
     });
+    this.todoService.getData();
   }
 
   showCompleted = true;
@@ -32,6 +33,7 @@ export class TodoListComponent implements OnInit {
 
   // Handles the show and hide feature for completed todos.
   handleShow() {
+    console.log(this.todoService.data.getValue());
     if (!this.showCompleted) {
       this.show = 'show';
       this.todoCompleted = 'todoCompleted';

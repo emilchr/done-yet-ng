@@ -1,12 +1,26 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Todo } from '../components/todo-list/todo.interface';
 import { ToastService } from './toast.service';
 @Injectable({
   providedIn: 'root',
 })
-export class TodoService {
-  //
+export class TodoService implements OnInit {
+  constructor(private http: HttpClient) {}
+  ngOnInit(): void {}
+
+  getData(): Observable<any> {
+    this.http
+      .get<{ todos: Todo[] }>('https://dummyjson.com/todos')
+      .subscribe((result) => {
+        this.data = new BehaviorSubject(result.todos);
+      });
+
+    return this.data;
+  }
+  data: any;
+
   toastService = inject(ToastService);
 
   todos = new BehaviorSubject<Todo[]>([
@@ -99,7 +113,6 @@ export class TodoService {
   // Adds todo to the list and toasts
   addTodo(newTodo: Todo) {
     const originalArray = this.todos.getValue();
-
     const newArray = [...originalArray, newTodo];
     this.todos.next(newArray); // Updates old array, with new todo.
 
