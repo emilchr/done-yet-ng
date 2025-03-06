@@ -51,7 +51,11 @@ hr {
 .conceal {
   display: none;
 }
+.todoUncompleted {
+  min-height: 10rem;
+}
 .todoCompleted {
+  min-height: 10em;
   margin-top: 0.5em;
   margin-bottom: 3rem;
   .todo {

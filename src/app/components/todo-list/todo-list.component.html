@@ -1,4 +1,5 @@
 <div class="todoList">
+  <app-loader *ngIf="isLoading"></app-loader>
   <div
     class="todoUncompleted"
     (dragover)="onDragOver($event)"
@@ -25,6 +26,7 @@
   <div [className]="show">
     <hr (click)="handleShow()" />
     <div [className]="todoCompleted" (dragover)="onDragOver($event)">
+      <app-loader *ngIf="isLoading"></app-loader>
       @for (todo of todos; track todo.id) {
         @if (todo.completed) {
           <app-todo-item

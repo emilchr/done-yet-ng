@@ -1,11 +1,13 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { LoaderComponent } from '../../loader/loader.component';
 import { TodoService } from '../../service/todo-list.service';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { Todo } from './todo.interface';
 
 @Component({
   selector: 'app-todo-list',
-  imports: [TodoItemComponent],
+  imports: [TodoItemComponent, NgIf, LoaderComponent],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css',
   encapsulation: ViewEncapsulation.None,
@@ -13,6 +15,7 @@ import { Todo } from './todo.interface';
 export class TodoListComponent implements OnInit {
   todos: Todo[] = [];
   todoService;
+  isLoading = false;
   constructor(todoService: TodoService) {
     // this.todos = todos.getTodos();
     this.todoService = todoService; // Binds the service to this.todoService.
@@ -20,11 +23,16 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Activates loader flag
+    this.isLoading = true;
+
     // Gets the todo list from todo service
-    this.todoService.todos.subscribe((todos) => {
-      return (this.todos = todos);
-    });
-    // this.todoService.getData();
+    setTimeout(() => {
+      this.todoService.todos.subscribe((todos) => {
+        this.isLoading = false; // Deactivates loader flag
+        return (this.todos = todos);
+      });
+    }, 1000);
   }
 
   showCompleted = true;
