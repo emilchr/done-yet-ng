@@ -14,7 +14,7 @@ export class TodoService implements OnInit {
 
   getData(): any {
     this.http
-      .get<{ todos: Todo[] }>('https://dummyjson.com/todos')
+      .get<{ todos: Todo[] }>('https://dummyjson.com/todos?limit=15')
       .subscribe((result) => {
         this.data = result.todos;
         this.todos.next(result.todos);
@@ -24,6 +24,9 @@ export class TodoService implements OnInit {
   todos = new BehaviorSubject<Todo[]>([]);
   toastService = inject(ToastService);
 
+  //
+  // ? Old todo structure
+  //
   // todos = new BehaviorSubject<Todo[]>([
   //   {
   //     id: 0,
