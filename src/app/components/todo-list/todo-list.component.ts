@@ -24,7 +24,7 @@ export class TodoListComponent implements OnInit {
     this.todoService.todos.subscribe((todos) => {
       return (this.todos = todos);
     });
-    this.todoService.getData();
+    // this.todoService.getData();
   }
 
   showCompleted = true;
@@ -33,7 +33,7 @@ export class TodoListComponent implements OnInit {
 
   // Handles the show and hide feature for completed todos.
   handleShow() {
-    console.log(this.todoService.data.getValue());
+    console.log(this.todoService.todos.getValue());
     if (!this.showCompleted) {
       this.show = 'show';
       this.todoCompleted = 'todoCompleted';
@@ -53,10 +53,10 @@ export class TodoListComponent implements OnInit {
     this.currentTodo = todo;
     const cloneDiv = document.createElement('div');
     const span = document.createElement('span');
-    cloneDiv.innerHTML = `<span>${todo.todo}</span><input name="checkbox" type="checkbox" ${todo.isComplete ? 'checked="true"' : ''}/> <label for="checkbox"></label>`;
+    cloneDiv.innerHTML = `<span>${todo.todo}</span><input name="checkbox" type="checkbox" ${todo.completed ? 'checked="true"' : ''}/> <label for="checkbox"></label>`;
 
     cloneDiv.className = 'todo';
-    todo.isComplete && cloneDiv.classList.add('todoComplete');
+    todo.completed && cloneDiv.classList.add('todoComplete');
     cloneDiv.id = 'dragging';
 
     document.body.appendChild(cloneDiv).appendChild(span);
@@ -80,7 +80,7 @@ export class TodoListComponent implements OnInit {
     const newStatus: Todo = {
       id: todo.id,
       todo: todo.todo,
-      isComplete: status,
+      completed: status,
       userId: todo.userId,
     };
     this.todoService.setStatus(newStatus);

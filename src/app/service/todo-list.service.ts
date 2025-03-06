@@ -7,96 +7,97 @@ import { ToastService } from './toast.service';
   providedIn: 'root',
 })
 export class TodoService implements OnInit {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getData();
+  }
   ngOnInit(): void {}
 
-  getData(): Observable<any> {
+  getData(): any {
     this.http
       .get<{ todos: Todo[] }>('https://dummyjson.com/todos')
       .subscribe((result) => {
-        this.data = new BehaviorSubject(result.todos);
+        this.data = result.todos;
+        this.todos.next(result.todos);
       });
-
-    return this.data;
   }
   data: any;
-
+  todos = new BehaviorSubject<Todo[]>([]);
   toastService = inject(ToastService);
 
-  todos = new BehaviorSubject<Todo[]>([
-    {
-      id: 0,
-      todo: 'Removing the wet weather',
-      isComplete: false,
-      userId: 1,
-    },
-    {
-      id: 1,
-      todo: 'Adding soap to the rain',
-      isComplete: false,
-      userId: 1,
-    },
-    {
-      id: 2,
-      todo: 'Closing down shop',
-      isComplete: false,
-      userId: 1,
-    },
-    {
-      id: 3,
-      todo: 'Marking a todo as done',
-      isComplete: true,
-      userId: 1,
-    },
-    {
-      id: 4,
-      todo: 'Fill up editor',
-      isComplete: false,
-      userId: 1,
-    },
-    {
-      id: 5,
-      todo: 'Celebrate your victory',
-      isComplete: true,
-      userId: 1,
-    },
-    {
-      id: 42,
-      todo: 'Total and utter destruction of Pluto',
-      isComplete: true,
-      userId: 1,
-    },
-    {
-      id: 1337,
-      todo: 'Make someone say my name',
-      isComplete: false,
-      userId: 1,
-    },
-    {
-      id: 1306,
-      todo: 'Making the checkbox work',
-      isComplete: true,
-      userId: 1,
-    },
-    {
-      id: 1202,
-      todo: 'Adding toasts with a service',
-      isComplete: false,
-      userId: 1,
-    },
-    {
-      id: 1201,
-      todo: 'Forcing the input to post todo',
-      isComplete: true,
-      userId: 1,
-    },
-    {
-      id: 1203,
-      todo: 'Add functionality to the show/hide button',
-      isComplete: false,
-      userId: 1,
-    },
-  ]);
+  // todos = new BehaviorSubject<Todo[]>([
+  //   {
+  //     id: 0,
+  //     todo: 'Removing the wet weather',
+  //     isComplete: false,
+  //     userId: 1,
+  //   },
+  //   {
+  //     id: 1,
+  //     todo: 'Adding soap to the rain',
+  //     isComplete: false,
+  //     userId: 1,
+  //   },
+  //   {
+  //     id: 2,
+  //     todo: 'Closing down shop',
+  //     isComplete: false,
+  //     userId: 1,
+  //   },
+  //   {
+  //     id: 3,
+  //     todo: 'Marking a todo as done',
+  //     isComplete: true,
+  //     userId: 1,
+  //   },
+  //   {
+  //     id: 4,
+  //     todo: 'Fill up editor',
+  //     isComplete: false,
+  //     userId: 1,
+  //   },
+  //   {
+  //     id: 5,
+  //     todo: 'Celebrate your victory',
+  //     isComplete: true,
+  //     userId: 1,
+  //   },
+  //   {
+  //     id: 42,
+  //     todo: 'Total and utter destruction of Pluto',
+  //     isComplete: true,
+  //     userId: 1,
+  //   },
+  //   {
+  //     id: 1337,
+  //     todo: 'Make someone say my name',
+  //     isComplete: false,
+  //     userId: 1,
+  //   },
+  //   {
+  //     id: 1306,
+  //     todo: 'Making the checkbox work',
+  //     isComplete: true,
+  //     userId: 1,
+  //   },
+  //   {
+  //     id: 1202,
+  //     todo: 'Adding toasts with a service',
+  //     isComplete: false,
+  //     userId: 1,
+  //   },
+  //   {
+  //     id: 1201,
+  //     todo: 'Forcing the input to post todo',
+  //     isComplete: true,
+  //     userId: 1,
+  //   },
+  //   {
+  //     id: 1203,
+  //     todo: 'Add functionality to the show/hide button',
+  //     isComplete: false,
+  //     userId: 1,
+  //   },
+  // ]);
 
   // Returns the whole todo list
   getTodos() {
@@ -162,22 +163,22 @@ export class TodoService implements OnInit {
     // Checks if the todo has been reordered and if the status is the same.
     if (
       oldIndex !== this.newIndex &&
-      currentTodo.isComplete == oldTodo?.isComplete
+      currentTodo.completed == oldTodo?.completed
     ) {
       this.toastService.showToast('Rearranged!', 'correct');
-    } else if (currentTodo.isComplete == oldTodo?.isComplete) {
+    } else if (currentTodo.completed == oldTodo?.completed) {
       // Checks if the new status and the old status is similar.
       this.toastService.showToast('No change', 'alert');
     } else {
       // Displays toast based on status.
-      currentTodo.isComplete
+      currentTodo.completed
         ? this.toastService.showToast('Todo done!', 'correct')
         : this.toastService.showToast('Marked as undone', 'alert');
     }
 
     const newArray = todos.map((todo) => {
       if (todo.id === currentTodo.id) {
-        return { ...todo, isComplete: currentTodo.isComplete };
+        return { ...todo, completed: currentTodo.completed };
       }
       return todo;
     });

@@ -25,7 +25,7 @@ export class UserInputComponent {
         id: Math.floor(Math.random() * 10000),
 
         todo: this.inputForm.value.userInput,
-        isComplete: false,
+        completed: false,
         userId: Math.floor(Math.random() * 10),
       });
       this.inputForm.reset();

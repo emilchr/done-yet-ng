@@ -21,7 +21,7 @@ export class TodoItemComponent implements OnInit {
   todoService = inject(TodoService);
   @Input() id: any;
   @Input() todo: any;
-  @Input() isComplete = false;
+  @Input() completed = false;
   @Input() userId: any;
 
   private formBuilder = inject(FormBuilder);
@@ -38,7 +38,7 @@ export class TodoItemComponent implements OnInit {
     const newStatus: Todo = {
       id: this.id,
       todo: this.todo,
-      isComplete: this.isComplete ? false : true, // Chooses the status based on what the previous status was
+      completed: this.completed ? false : true, // Chooses the status based on what the previous status was
       userId: this.userId,
     };
     this.todoService.setStatus(newStatus);

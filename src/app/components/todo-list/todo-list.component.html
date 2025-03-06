@@ -5,11 +5,11 @@
     (drop)="onDrop($event, currentTodo, false)"
   >
     @for (todo of todos; track todo.id) {
-      @if (!todo.isComplete) {
+      @if (!todo.completed) {
         <app-todo-item
           [todo]="todo.todo"
           [id]="todo.id"
-          [isComplete]="todo.isComplete"
+          [completed]="todo.completed"
           [userId]="todo.userId"
           (drag)="onDrag($event, todo)"
           (dragstart)="onStart($event, todo)"
@@ -26,11 +26,11 @@
     <hr (click)="handleShow()" />
     <div [className]="todoCompleted" (dragover)="onDragOver($event)">
       @for (todo of todos; track todo.id) {
-        @if (todo.isComplete) {
+        @if (todo.completed) {
           <app-todo-item
             [todo]="todo.todo"
             [id]="todo.id"
-            [isComplete]="todo.isComplete"
+            [completed]="todo.completed"
             (drag)="onDrag($event, todo)"
             (dragstart)="onStart($event, todo)"
             (dragend)="onDragEnd($event)"
