@@ -23,7 +23,6 @@ export class UserInputComponent {
     if (this.inputForm.value.userInput) {
       this.todoService.addTodo({
         id: Math.floor(Math.random() * 10000),
-
         todo: this.inputForm.value.userInput,
         completed: false,
         userId: Math.floor(Math.random() * 10),

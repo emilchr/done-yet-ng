@@ -120,6 +120,13 @@ export class TodoService implements OnInit {
     const newArray = [...originalArray, newTodo];
     this.todos.next(newArray); // Updates old array, with new todo.
 
+    const headers = { 'Content-Type': 'application/json' };
+    console.log(newTodo);
+    this.http
+      .post<any>('https://dummyjson.com/todos/add', JSON.stringify(newTodo), {
+        headers,
+      })
+      .subscribe((data) => console.log(data));
     this.toastService.showToast('Todo created!', 'correct');
   }
 
