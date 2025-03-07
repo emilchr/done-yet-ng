@@ -131,7 +131,7 @@ export class TodoService implements OnInit {
           headers,
         }
       )
-      .subscribe((data) => console.log(data.id + ' post'));
+      .subscribe((data) => console.log(data));
 
     // Toasts if the todo created.
     this.toastService.showToast('Todo created!', 'correct');
@@ -148,14 +148,14 @@ export class TodoService implements OnInit {
       if (todo.id === currentTodo.id) {
         // Updates the todo in the api
         this.http
-          .put<any>(
+          .patch<any>(
             `https://dummyjson.com/todos/${currentTodo.id}`,
-            JSON.stringify(currentTodo),
+            JSON.stringify({ completed: 'true' }),
             {
               headers,
             }
           )
-          .subscribe((data) => console.log(data.id + ' post'));
+          .subscribe((data) => console.log(data.id + ' update'));
         return { ...todo, todo: newtodo };
       }
       // Return the updated todo.
