@@ -1,59 +1,58 @@
-# DoneYetAngular
+# DoneYet ng
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+This Angular project is a refactor of the original React DoneYet project, but
+with extra functionality. The reason for the projects creation is souly to
+increase my understanding of Angular and the best practices.
 
-## Development server
+The project is a simple todo list web app (big woop).
 
-To start a local development server, run:
+## Technologies used
 
-```bash
-ng serve
-```
+- Angular
+- HTML
+- CSS
+- Typescript
+- NPM
+- Git
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Features
 
-## Code scaffolding
+**Connection to DummyAPI** The project fetches data from the DummyJSON API nd
+displays it in the web app.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Components, Services and Functions
 
-```bash
-ng generate component component-name
-```
+### todo-list.service
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Handles the business logic for the todo-list.component.
 
-```bash
-ng generate --help
-```
+### todo-list.component
 
-## Building
+### todo-item.component
 
-To build the project run:
+### user-input.component
 
-```bash
-ng build
-```
+### loader.component
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### toast.component
 
-## Running unit tests
+### toast.service
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Testing:
 
-```bash
-ng test
-```
+- No testing has been done yet (pun intended).
 
-## Running end-to-end tests
+## Known bugs and fixes
 
-For end-to-end (e2e) testing, run:
+- None currently (coming)
 
-```bash
-ng e2e
-```
+## Future features
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [x] Connect to the DummyJSON API
+- [ ] Post data to the DummyJSON API
+- [ ] Update data in the DummyJSON API
+- [ ] Delete data from the DummyJSON API
+- [ ] Add a http interceptor to requests going to the DummyJSON API
+- [ ] Add support for Firebase DB with login and auth
+- [ ] Implement some form for gamification
+- [ ]
