@@ -116,17 +116,24 @@ export class TodoService implements OnInit {
 
   // Adds todo to the list and toasts
   addTodo(newTodo: Todo) {
+    const currentTodo = newTodo;
     const originalArray = this.todos.getValue();
-    const newArray = [...originalArray, newTodo];
+    const newArray = [...originalArray, currentTodo];
     this.todos.next(newArray); // Updates old array, with new todo.
 
+    // Posts todo to the api
     const headers = { 'Content-Type': 'application/json' };
-    console.log(newTodo);
     this.http
-      .post<any>('https://dummyjson.com/todos/add', JSON.stringify(newTodo), {
-        headers,
-      })
-      .subscribe((data) => console.log(data));
+      .post<any>(
+        'https://dummyjson.com/todos/add',
+        JSON.stringify(currentTodo),
+        {
+          headers,
+        }
+      )
+      .subscribe((data) => console.log(data.id + ' post'));
+
+    // Toasts if the todo created.
     this.toastService.showToast('Todo created!', 'correct');
   }
 
@@ -136,7 +143,19 @@ export class TodoService implements OnInit {
 
     const updatedArray = todos.map((todo) => {
       // If the id is correct, edit the todo.
+
+      const headers = { 'Content-Type': 'application/json' };
       if (todo.id === currentTodo.id) {
+        // Updates the todo in the api
+        this.http
+          .put<any>(
+            `https://dummyjson.com/todos/${currentTodo.id}`,
+            JSON.stringify(currentTodo),
+            {
+              headers,
+            }
+          )
+          .subscribe((data) => console.log(data.id + ' post'));
         return { ...todo, todo: newtodo };
       }
       // Return the updated todo.
