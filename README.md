@@ -49,10 +49,9 @@ Handles the business logic for the todo-list.component.
 ## Future features
 
 - [x] Connect to the DummyJSON API
-- [ ] Post data to the DummyJSON API
-- [ ] Update data in the DummyJSON API
+- [x] Post data to the DummyJSON API
+- [x] Update data in the DummyJSON API
 - [ ] Delete data from the DummyJSON API
-- [ ] Add a http interceptor to requests going to the DummyJSON API
+- [ ] Add a http interceptor for headers to requests going to the DummyJSON API
 - [ ] Add support for Firebase DB with login and auth
 - [ ] Implement some form for gamification
-- [ ]
