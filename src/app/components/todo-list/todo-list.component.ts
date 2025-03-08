@@ -32,7 +32,7 @@ export class TodoListComponent implements OnInit {
         this.isLoading = false; // Deactivates loader flag
         return (this.todos = todos);
       });
-    }, 1000);
+    }, 200);
   }
 
   showCompleted = true;
