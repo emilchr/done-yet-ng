@@ -148,7 +148,7 @@ export class TodoService implements OnInit {
       if (todo.id === currentTodo.id) {
         // Updates the todo in the api
         this.http
-          .patch<any>(
+          .put<any>(
             `https://dummyjson.com/todos/${currentTodo.id}`,
             JSON.stringify({ completed: 'true' }),
             {
@@ -161,9 +161,11 @@ export class TodoService implements OnInit {
       // Return the updated todo.
       return todo;
     });
+
     // Markes todo status to true (completed) or false (not completed) and sends the new updated array to the behaviorSubject this.todos.
     this.todos.next(updatedArray);
   }
+
   // Stores new index of the todo, if it has been rearranged. Otherwise undefined.
   newIndex: any;
 
@@ -187,9 +189,11 @@ export class TodoService implements OnInit {
     // Sets the old and new index in the list
     const todos = this.getTodos();
     const oldTodo = this.getTodo(currentTodo.id); // retrieves the old Todo
+
     const oldIndex = todos.findIndex((todo: Todo) => todo.id === oldTodo?.id); // Sets the index of the old todo.
 
     // Checks if the todo has been reordered and if the status is the same.
+
     if (
       oldIndex !== this.newIndex &&
       currentTodo.completed == oldTodo?.completed
@@ -197,6 +201,7 @@ export class TodoService implements OnInit {
       this.toastService.showToast('Rearranged!', 'correct');
     } else if (currentTodo.completed == oldTodo?.completed) {
       // Checks if the new status and the old status is similar.
+
       this.toastService.showToast('No change', 'alert');
     } else {
       // Displays toast based on status.
@@ -209,6 +214,16 @@ export class TodoService implements OnInit {
       if (todo.id === currentTodo.id) {
         return { ...todo, completed: currentTodo.completed };
       }
+      const headers = { 'Content-Type': 'application/json' };
+      this.http
+        .put<any>(
+          `https://dummyjson.com/todos/${currentTodo.id}`,
+          JSON.stringify({ completed: currentTodo.completed }),
+          {
+            headers,
+          }
+        )
+        .subscribe((data) => console.log(data.id + '  ' + data.completed));
       return todo;
     });
     // Markes todo status to true (completed) or false (not completed) and sends the new updated array to the behaviorSubject this.todos.
