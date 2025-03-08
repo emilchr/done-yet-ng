@@ -24,19 +24,12 @@ displays it in the web app.
 
 ### todo-list.service
 
-Handles the business logic for the todo-list.component.
-
-### todo-list.component
-
-### todo-item.component
-
-### user-input.component
-
-### loader.component
-
-### toast.component
+Handles the business logic for the todo-list.component. With API calls and logic
+for the todos.
 
 ### toast.service
+
+Handles the business logic for toasting in the app.
 
 ## Testing:
 
@@ -51,7 +44,6 @@ Handles the business logic for the todo-list.component.
 - [x] Connect to the DummyJSON API
 - [x] Post data to the DummyJSON API
 - [x] Update data in the DummyJSON API
-- [ ] Delete data from the DummyJSON API
-- [ ] Add a http interceptor for headers to requests going to the DummyJSON API
+- [x] Add a http interceptor for headers to requests going to the DummyJSON API
 - [ ] Add support for Firebase DB with login and auth
-- [ ] Implement some form for gamification
+- [ ] Implement some form of gamification

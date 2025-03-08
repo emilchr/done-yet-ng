@@ -122,15 +122,8 @@ export class TodoService implements OnInit {
     this.todos.next(newArray); // Updates old array, with new todo.
 
     // Posts todo to the api
-    const headers = { 'Content-Type': 'application/json' };
     this.http
-      .post<any>(
-        'https://dummyjson.com/todos/add',
-        JSON.stringify(currentTodo),
-        {
-          headers,
-        }
-      )
+      .post<any>('https://dummyjson.com/todos/add', JSON.stringify(currentTodo))
       .subscribe((data) => console.log(data));
 
     // Toasts if the todo created.
@@ -144,16 +137,12 @@ export class TodoService implements OnInit {
     const updatedArray = todos.map((todo) => {
       // If the id is correct, edit the todo.
 
-      const headers = { 'Content-Type': 'application/json' };
       if (todo.id === currentTodo.id) {
         // Updates the todo in the api
         this.http
           .put<any>(
             `https://dummyjson.com/todos/${currentTodo.id}`,
-            JSON.stringify({ completed: 'true' }),
-            {
-              headers,
-            }
+            JSON.stringify({ completed: 'true' })
           )
           .subscribe((data) => console.log(data.id + ' update'));
         return { ...todo, todo: newtodo };
@@ -214,18 +203,15 @@ export class TodoService implements OnInit {
       if (todo.id === currentTodo.id) {
         return { ...todo, completed: currentTodo.completed };
       }
-      const headers = { 'Content-Type': 'application/json' };
-      this.http
-        .put<any>(
-          `https://dummyjson.com/todos/${currentTodo.id}`,
-          JSON.stringify({ completed: currentTodo.completed }),
-          {
-            headers,
-          }
-        )
-        .subscribe((data) => console.log(data.id + '  ' + data.completed));
+
       return todo;
     });
+    this.http
+      .put<any>(
+        `https://dummyjson.com/todos/${currentTodo.id}`,
+        JSON.stringify({ completed: currentTodo.completed })
+      )
+      .subscribe((data) => console.log(data.id + '  ' + data.completed));
     // Markes todo status to true (completed) or false (not completed) and sends the new updated array to the behaviorSubject this.todos.
     this.todos.next(newArray);
   }
